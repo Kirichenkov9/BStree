@@ -1,0 +1,11 @@
+﻿cmake_minimum_required(VERSION 3.0)
+project(BStree)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_library(BStree STATIC ${CMAKE_CURRENT_SOURCE_DIR}/sources/tree.cpp)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+add_executable(example ${CMAKE_CURRENT_SOURCE_DIR}/examples/example.cpp)
+
+target_link_libraries(example BStree)
+add_executable(main ${CMAKE_CURRENT_SOURCE_DIR}/sources/main.cpp)
+target_link_libraries(main BStree)

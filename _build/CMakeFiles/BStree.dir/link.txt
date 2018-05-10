@@ -1,0 +1,2 @@
+/usr/bin/ar qc libBStree.a  CMakeFiles/BStree.dir/sources/tree.cpp.o
+/usr/bin/ranlib libBStree.a

@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/tree.hpp
+iostream
+-
+fstream
+-
+cstring
+-
+
+/home/anton/workspace/BStree/examples/example.cpp
+iostream
+-
+locale
+-
+cstring
+-
+tree.hpp
+/home/anton/workspace/BStree/examples/tree.hpp
+
