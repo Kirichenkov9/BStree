@@ -1,5 +1,0 @@
-/home/anton/workspace/BStree/_build/CMakeFiles/rebuild_cache.dir
-/home/anton/workspace/BStree/_build/CMakeFiles/edit_cache.dir
-/home/anton/workspace/BStree/_build/CMakeFiles/main.dir
-/home/anton/workspace/BStree/_build/CMakeFiles/BStree.dir
-/home/anton/workspace/BStree/_build/CMakeFiles/example.dir
