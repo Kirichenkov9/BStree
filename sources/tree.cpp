@@ -66,7 +66,7 @@ auto BStree::Tree::print_root(const Node* node ) -> void {
         if(node == root) {
             print_root(node->right);
             std::cout<<std::endl;
-            std::cout<<" "<<node->data;
+            std::cout<<" \033[1;32m"<<node->data;
             std::cout << std::endl << std::endl;
             print_root(node->left);
             return;

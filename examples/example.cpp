@@ -27,27 +27,58 @@ int main(){
 	std::cout<<std::endl;
 
 	std::cout<<"\033[0;32mДобавим в дерево 1 узел со значением 100:\033[0;34m"<<std::endl;
-	tree.add(100);
+	if(!tree.add(100))
+                std::cout<<"\033[1;31mУзел уже существует!\033[0;37m\U0001F631\033[0;34m" <<std::endl;
+
+
+
 	std::cout<<"\033[0;32mДобавим в дерево 1 узел со значением 25:\033[0;34m"<<std::endl;
-	tree.add(25);
+	if(!tree.add(25))
+                std::cout<<"\033[1;31mУзел уже существует!\033[0;37m\U0001F631\033[0;34m" <<std::endl;
+
+
+
 	std::cout<<"\033[0;32mУдалим из дерева 1 узел со значением 25:\033[0;34m"<<std::endl;
-	tree.remove(25);
+	 if(!tree.remove(25)) 
+                std::cout<<"\033[1;31mУзел не найден!\033[1;37m\U0001F647\033[0;34m" <<std::endl;
+
+
+
 	std::cout<<"\033[0;32mУдалим из дерева 1 узел со значением 1:\033[0;34m"<<std::endl;
-	tree.remove(1);
+	 if(!tree.remove(1)) 
+                std::cout<<"\033[1;31mУзел  не найден!\033[1;37m\U0001F647\033[0;34m" <<std::endl;
+
+
+
 	std::cout<<"\033[0;32mВыведем дерево 1:"<<std::endl;
     tree.print();
     std::cout<<std::endl;
 
+
+
     std::cout<<"\033[0;32mДобавим в дерево 2 узел со значением 99:\033[0;34m"<<std::endl;
-	tree1.add(99);
+	if(!tree1.add(99))
+                std::cout<<"\033[1;31mУзел уже существует!\033[0;37m\U0001F631\033[0;34m" <<std::endl;
+
+
+
 	std::cout<<"\033[0;32mВыведем дерево 2:"<<std::endl;
 	tree1.print();
 	std::cout<<std::endl;
+
+
+
 	std::cout<<"\033[0;32mУдалим из дерева 2 узел со значением 99:\033[0;34m"<<std::endl;
-	tree1.remove(99);
+	 if(!tree1.remove(99)) 
+                std::cout<<"\033[1;31mУзел  не найден!\033[1;37m\U0001F647\033[0;34m" <<std::endl;
+
+
+
 	std::cout<<"\033[0;32mВыведем дерево 2:"<<std::endl;
 	tree1.print();
 	std::cout<<std::endl;
+
+
 
     std::cout<<"\033[0;32mСохраним дерево 1 в файл BStree.txt \033[0;34m"<<std::endl;
 	tree.save("BStree.txt");
@@ -57,10 +88,20 @@ int main(){
 	tree1.print();
 	std::cout<<std::endl;
     
+    
     std::cout<<"\033[0;32mНайдем в дереве 1 узел со значением 100:\033[0;34m"<<std::endl;
-	tree.search(100);
+	if(!tree.search(100))
+                std::cout<<"\033[1;31mУзел не найден!\033[1;37m\U0001F647\033[0;34m" <<std::endl;
+            else
+                std::cout<<"\033[1;35mУзел найден!\033[1;37m\U0001F483\033[0;34m" <<std::endl;
+
+
+
 	std::cout<<"\033[0;32mНайдем в дереве 1 узел со значением 10000:\033[0;34m "<<std::endl;
-	tree.search(10000);
+	if(!tree.search(10000))
+                std::cout<<"\033[1;31mУзел не найден!\033[1;37m\U0001F647\033[0;34m" <<std::endl;
+            else
+                std::cout<<"\033[1;35mУзел найден!\033[1;37m\U0001F483\033[0;34m" <<std::endl;
 
     return 0;
 	}
