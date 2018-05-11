@@ -8,11 +8,11 @@ int main(){
 	setlocale(LC_ALL, "RUS");
 	BStree::Tree tree = { 25, 4, 55, 5, 67, -4, 0, 6};
 	BStree::Tree tree1;
-
-	std::cout<<"\033[0;32mВыведем дерево 1:\033[0;34m"<<std::endl;
+    
+	std::cout<<"\033[0;32mСоздадим и выведем дерево 1 с элементами 25 4 55 5 67 -4 0 6:\033[0;34m"<<std::endl;
 	tree.print();
 	std::cout<<std::endl;
-	std::cout<<"\033[0;32mВыведем дерево 2:\033[0;34m"<<std::endl;
+	std::cout<<"\033[0;32mСоздадим пустое дерево 2 и выведем его:\033[0;34m"<<std::endl;
 	tree1.print();
 	std::cout<<std::endl;
     
