@@ -16,7 +16,7 @@ BStree::Tree::Tree(const Tree& tree){
     std::string str;
     std::stringstream out(str);
     out << tree;
-    size_t value;
+    int value;
     while(out){
         out >> value;
         this->add(value);
