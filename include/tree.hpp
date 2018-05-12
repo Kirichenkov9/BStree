@@ -34,7 +34,6 @@ public:
     auto friend operator<<(std::ostream& stream, const Tree&) -> std::ostream&;
     auto operator=(const Tree&) -> Tree&;
     ~Tree() {
-        std::cout<<"Память очищена"<<std::endl;
         destructor(root);
     }
 
