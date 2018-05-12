@@ -1,12 +1,25 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <sstream>
 #include "tree.hpp"
 
 BStree::Tree::Tree(std::initializer_list<int> list){
     root = nullptr;
     for (auto x: list ) {
         this->add(x);        
+    }
+}
+
+BStree::Tree::Tree(const Tree& tree){
+    root = nullptr;
+    std::string str;
+    std::stringstream out(str);
+    out << tree;
+    size_t value;
+    while(out){
+        out >> value;
+        this->add(value);
     }
 }
 
@@ -68,7 +81,7 @@ auto BStree::Tree::print_root(const Node* node ) -> void {
             std::cout<<std::endl;
             std::cout<<" \033[1;32m"<<node->data;
             std::cout << std::endl << std::endl;
-            print_root(node->left);
+            print_root(node->left);         
             return;
         }
         indent++;
@@ -82,7 +95,7 @@ auto BStree::Tree::print_root(const Node* node ) -> void {
     }
 }
 
-auto print_pre(std::ostream& out,const BStree::Node* node) -> std::ostream&{
+auto print_pre(std::ostream& out, const BStree::Node* node) -> std::ostream&{
     if(node != nullptr) {
         out << node->data<<"  ";
         print_pre(out, node->left);
@@ -91,7 +104,7 @@ auto print_pre(std::ostream& out,const BStree::Node* node) -> std::ostream&{
     return out;
 }
 
-auto print_in(std::ostream& out,const BStree::Node* node)-> std::ostream&{
+auto print_in(std::ostream& out, const BStree::Node* node)-> std::ostream&{
     if(node != nullptr) {
         print_in(out,node->left);
         out << node->data<<"  ";
@@ -121,6 +134,10 @@ auto BStree::Tree::print_order(std::ostream& out, BStree::traversal_order order)
     return out;
 }
 
+auto BStree::Tree::swap(Tree& tree) -> void {
+   std::swap(root, tree.root);
+}
+
 auto BStree::Tree::destructor(Node* node) -> void {
     if(node != nullptr) {
         destructor(node->left);
@@ -135,7 +152,7 @@ auto BStree::Tree::remove(int value)-> bool{
     Node* pointer = root;
     Node* parent  = nullptr;
 
-    while(pointer != nullptr && pointer->data != value) {
+    while( pointer->data != value) {
         parent = pointer;
         if(value < pointer->data)
             pointer = pointer->left;
@@ -209,9 +226,10 @@ auto BStree::Tree::save(const std::string& filename) -> bool {
     }
 }
 
-auto BStree::Tree::operator=(const Tree& tmp) -> Tree&{
-    this->destructor(this->root);
-    this->root  = tmp.root;
+auto BStree::Tree::operator=(const Tree& tree) -> Tree&{
+    destructor(root);
+    Tree tmp{tree};
+    this->swap(tmp);
     return *this;
 }
 
@@ -242,7 +260,6 @@ auto showmenu() -> void {
     <<"7. Проверить наличие узла"<<std::endl
     <<"8. Завершить работу программы"<<std::endl;
 }
-
 
 auto BStree::Tree::empty() const -> bool {
     if(root == nullptr)

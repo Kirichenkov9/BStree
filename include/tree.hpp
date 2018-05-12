@@ -21,8 +21,10 @@ public:
         root = nullptr;
     }
     Tree(std::initializer_list<int> list);
+    Tree(const Tree& tree);
     auto remove(int value)->bool;
     auto search(int value) const -> bool;
+    auto swap(Tree& tree) -> void;
     auto add(int value) -> bool;
     auto empty() const -> bool;
     auto print() -> void;
@@ -32,6 +34,7 @@ public:
     auto friend operator<<(std::ostream& stream, const Tree&) -> std::ostream&;
     auto operator=(const Tree&) -> Tree&;
     ~Tree() {
+        std::cout<<"Память очищена"<<std::endl;
         destructor(root);
     }
 

@@ -9,14 +9,8 @@ int main(int argc, char* argv[]) {
     setlocale(LC_ALL, "RUS");
     BStree::Tree tree;
     if(argc == 2 ) {
-        char* first_value = argv[1] ;
-        while(1) {
-            tree.add(atoi(first_value));
-            first_value = strchr(first_value, ',') + 1;
-            if(!strchr(first_value, ','))
-                break;
-        }
-        tree.add(atoi(first_value));
+        tree.add(atoi(argv[1]));
+       
     } else if(argc >2 ) {
         for (int i = 1; i < argc ; i++) {
             tree.add(atoi(argv[i]));
@@ -141,8 +135,8 @@ int main(int argc, char* argv[]) {
                 std::cout<<"\033[1;31mУзел не найден!\033[1;37m\U0001F647\033[0;34m" <<std::endl;
             else
                 std::cout<<"\033[1;35mУзел найден!\033[1;37m\U0001F483\033[0;34m" <<std::endl;
-
         }
+
         break;
 
         case 8: {
