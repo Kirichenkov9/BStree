@@ -201,10 +201,6 @@ auto BStree::Tree::remove(int value)-> bool{
     return true;
 }
 
-//auto BStree::operator<<(std::ostream& stream, const Tree& tree) -> std::ostream& {
-  //  return print_pre(stream, tree.root);
-//}
-
 auto BStree::Tree::save(const std::string& filename) -> bool {
     std::ifstream fin(filename.c_str());
     if (!fin.is_open()) {

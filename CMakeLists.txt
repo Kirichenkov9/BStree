@@ -1,14 +1,41 @@
 ﻿cmake_minimum_required(VERSION 3.0)
-project(BStree)
-set(CMAKE_CXX_STANDARD 14)
+
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+option(BUILD_EXAMPLES "Build examples" OFF)
+option(BUILD_TESTS "Build tests" OFF)
+
+project(BStree)
+
 add_library(BStree STATIC ${CMAKE_CURRENT_SOURCE_DIR}/sources/tree.cpp)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
-add_executable(example ${CMAKE_CURRENT_SOURCE_DIR}/examples/example.cpp)
 
-target_link_libraries(example BStree)
 add_executable(main ${CMAKE_CURRENT_SOURCE_DIR}/sources/main.cpp)
 target_link_libraries(main BStree)
+
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ DESTINATION include)
+install(EXPORT BStree-config DESTINATION cmake)
+
+if(BUILD_EXAMPLES)
+  file(GLOB EXAMPLE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/examples/*.cpp")
+  foreach(EXAMPLE_SOURCE ${EXAMPLE_SOURCES})
+    get_filename_component(EXAMPLE_NAME ${EXAMPLE_SOURCE} NAME_WE)
+    add_executable(${EXAMPLE_NAME} ${EXAMPLE_SOURCE})
+    target_link_libraries(${EXAMPLE_NAME} BStree)
+    install(TARGETS ${EXAMPLE_NAME}
+      RUNTIME DESTINATION bin
+    )
+  endforeach(EXAMPLE_SOURCE ${EXAMPLE_SOURCES})
+endif()
+
+install(TARGETS BStree
+    EXPORT BStree-config
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+)
+
+
 
 if(BUILD_TESTS)
 enable_testing()
@@ -17,12 +44,3 @@ add_executable(check ${${PROJECT_NAME}_TEST_SOURCES})
 target_link_libraries(check ${PROJECT_NAME} ${DEPENDS_LIBRARIES})
 add_test(NAME check COMMAND check "-s" "-r" "compact" "--use-colour" "yes") 
 endif()
-add_executable(example1 ${CMAKE_CURRENT_SOURCE_DIR}/examples/example1.cpp)
-add_executable(example2 ${CMAKE_CURRENT_SOURCE_DIR}/examples/example2.cpp)
-add_executable(example3 ${CMAKE_CURRENT_SOURCE_DIR}/examples/example3.cpp)
-add_executable(example4 ${CMAKE_CURRENT_SOURCE_DIR}/examples/example4.cpp)
-
-target_link_libraries(example1 BStree)
-target_link_libraries(example2 BStree)
-target_link_libraries(example3 BStree)
-target_link_libraries(example4 BStree)
