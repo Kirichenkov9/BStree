@@ -5,7 +5,6 @@ script:
 - cmake --build _build
 - cmake --build _build --target install
 - cmake --build _build --target test -- ARGS=--verbose
-- cmake --build _build --target test -- ARGS=--verbose
 
 addons:
   apt:
