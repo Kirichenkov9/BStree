@@ -201,7 +201,7 @@ auto BStree::Tree::remove(int value)-> bool{
     return true;
 }
 
-auto operator<<(std::ostream& stream, const Tree& tree) -> std::ostream& {
+auto BStree::operator<<(std::ostream& stream, const Tree& tree) -> std::ostream& {
     return print_pre(stream, tree.root);
 }
 
