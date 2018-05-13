@@ -20,7 +20,7 @@ $ cmake --build _build --target test -- ARGS=--verbose
 ```ShellSession
 $ cmake -H. -B_build -DBUILD_EXAMPLES=ON
 $ cmake --build _build --target install
-$ cd _buld
+$ cd _build
 $ ./example<number>
  ```
 
