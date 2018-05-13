@@ -1,6 +1,5 @@
 *_build*/
-
-*.txt
+*_install*/
 # Prerequisites
 *.d
 
