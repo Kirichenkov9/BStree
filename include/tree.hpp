@@ -31,7 +31,9 @@ public:
     auto save(const std::string& path) -> bool;
     auto load(const std::string& path) -> bool;
     auto print_order(std::ostream& stream, traversal_order order) const -> std::ostream&;
-    auto friend operator<<(std::ostream& stream, const Tree&) -> std::ostream&;
+    auto friend operator<<(std::ostream& stream, const Tree& tree ) -> std::ostream&{
+         return tree.print_order(stream, BStree::traversal_order::pre);
+    }
     auto operator=(const Tree&) -> Tree&;
     ~Tree() {
         destructor(root);
