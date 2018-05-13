@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
     BStree::Tree tree;
     if(argc == 2 ) {
         tree.add(atoi(argv[1]));
-       
+
     } else if(argc >2 ) {
         for (int i = 1; i < argc ; i++) {
             tree.add(atoi(argv[i]));
@@ -97,7 +97,7 @@ int main(int argc, char* argv[]) {
                 std::cout << "\033[0;32mПовторите ввод: \033[1;37m \U0001F58E \033[0;32m:\033[0;34m";
                 std::cin >> value;
             }
-            if(!tree.remove(value)) 
+            if(!tree.remove(value))
                 std::cout<<"\033[1;31mУзел "<<value<<" не найден!\033[1;37m\U0001F647\033[0;34m" <<std::endl;
         }
         break;
