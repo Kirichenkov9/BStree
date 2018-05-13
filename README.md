@@ -1,7 +1,7 @@
 # BStree
 [![Build Status](https://travis-ci.org/Kirichenkov9/BStree.svg?branch=master)](https://travis-ci.org/Kirichenkov9/BStree)
 
-**It's a project of realization Binary Search tree**
+**This is a project of realization Binary Search tree**
 
 **Building of a project:**
 ```ShellSession
