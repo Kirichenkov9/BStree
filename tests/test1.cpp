@@ -113,9 +113,6 @@ TEST_CASE("Saving in and loading from file"){
 
 	std::freopen("answer.txt", "r", stdin);
 	tree.save("BStree.txt");
-	
-	
-	
 	tree1.load("BStree.txt");
 
 	std::string text = "8  4  2  1  3  6  5  7  12  10  9  11  14  13  15  ";
