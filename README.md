@@ -2,8 +2,9 @@
 [![Build Status](https://travis-ci.org/Kirichenkov9/BStree.svg?branch=master)](https://travis-ci.org/Kirichenkov9/BStree)
 
 **This is a project of realization Binary Search tree**
-```
+
 *In this project the following opportunities are realized:*
+```
 1) displaying the tree on the screen
 2) displaying the list of tree nodes (3 orders: pre, in, post)
 3) adding a node to the tree
