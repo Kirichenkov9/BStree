@@ -1,6 +1,6 @@
 *_build*/
 *_install*/
-*vlmrc*/
+*vimrc*/
 # Prerequisites
 *.d
 
