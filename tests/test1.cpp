@@ -112,6 +112,7 @@ TEST_CASE("Saving in and loading from file"){
     fout.close();
 
 	std::freopen("answer.txt", "r", stdin);
+	
 	tree.save("BStree.txt");
 	tree1.load("BStree.txt");
 
