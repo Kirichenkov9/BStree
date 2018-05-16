@@ -5,7 +5,7 @@
 auto error() -> void;
 int main() {
     setlocale(LC_ALL, "RUS");
-    BStree::Tree tree = { 25, 4, 55, 5, 67, -4, 0, 6};
+    BStree::Tree<int> tree = { 25, 4, 55, 5, 67, -4, 0, 6};
 
     std::cout<<"\033[1;33mПример вывода бинарного дерево поиска различными обходами:"<<std::endl;
 

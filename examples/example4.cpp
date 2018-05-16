@@ -5,8 +5,8 @@
 auto error() -> void;
 int main() {
     setlocale(LC_ALL, "RUS");
-    BStree::Tree tree = { 25, 4, 55, 5, 67, -4, 0, 6};
-    BStree::Tree tree1;
+    BStree::Tree<int> tree = { 25, 4, 55, 5, 67, -4, 0, 6};
+    BStree::Tree<int> tree1;
 
     std::cout<<"\033[1;33mПример загрузки в файл и из файла бинарного дерева поиска:"<<std::endl
              <<"\033[1;32mИсходное дерево 1:  \033[0;34m"<<std::endl;

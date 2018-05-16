@@ -1,4 +1,4 @@
-#include <iostream>
+/*#include <iostream>
 #include <fstream>
 #include <cstring>
 #include <sstream>
@@ -11,8 +11,7 @@ BStree::Tree::Tree(std::initializer_list<int> list) {
     }
 }
 
-BStree::Tree::Tree(const Tree& tree) {
-    root = nullptr;
+BStree::Tree::Tree(const Tree& tree) : Tree{} {
     std::string str;
     std::stringstream out(str);
     out << tree;
@@ -268,3 +267,4 @@ auto error() -> void {
     while (std::cin.get() != '\n');
     std::cout << "\033[1;31mВведено некорректное значение!\033[0;37m\U0001F631" << std::endl;
 }
+*/

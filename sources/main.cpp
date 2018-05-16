@@ -7,7 +7,7 @@ auto showmenu() -> void;
 auto error() -> void;
 int main(int argc, char* argv[]) {
     setlocale(LC_ALL, "RUS");
-    BStree::Tree tree;
+    BStree::Tree<int> tree;
     if(argc == 2 ) {
         tree.add(atoi(argv[1]));
 
