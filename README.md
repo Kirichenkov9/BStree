@@ -45,7 +45,7 @@ The benchmark of each open method is 10, 10 ^ 2, 10 ^ 3, 10 ^ 4, 10 ^ 5, 10 ^ 6,
 |Remove|:x:|:x:|:x:|:x:|:x:|
 
 
-|Operations| 10 | 10^2 | 10^3 | 10^4 | 10^5 | 10^6 | 10^7 | 10^8 | 10^9|
+|Operations|10|10^2|10^3|10^4|10^5|10^6|10^7|10^8|10^9|
 |---|---|---|---|---|---|
 |Insert|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
 |Search|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
