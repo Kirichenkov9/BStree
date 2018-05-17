@@ -16,7 +16,7 @@ int main() {
     std::ofstream fout("bench.txt");
     clock_t  t_start;
     clock_t  t_end;
-    for (size_t exp = 1; exp <= 9;  exp ++ ) {
+    for (size_t exp = 1; exp < 9;  exp ++ ) {
         int value;
         BStree::Tree<int> tree;
         for(size_t num_el = 1; num_el <= pow(10,exp); num_el++) {
