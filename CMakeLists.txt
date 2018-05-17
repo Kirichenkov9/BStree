@@ -11,6 +11,7 @@ project(BStree)
 add_library(BStree STATIC ${CMAKE_CURRENT_SOURCE_DIR}/sources/tree.cpp)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
+add_executable(benchmark_add ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark_add.cpp)
 add_executable(main ${CMAKE_CURRENT_SOURCE_DIR}/sources/main.cpp)
 target_link_libraries(main BStree)
 
