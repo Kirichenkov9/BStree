@@ -45,7 +45,7 @@ The benchmark of each open method is 10, 10 ^ 2, 10 ^ 3, 10 ^ 4, 10 ^ 5, 10 ^ 6,
 |Remove|:x:|:x:|:x:|:x:|:x:|
 
 
-|Operations|10|10^2|10^3|10^4|10^5|10^6|10^7|10^8|10^9|
+|Operations|Print|Print pre order|Print in oreder|Print post order|Insert|Remove|Exist|Save in file|Load from file|
 |---|---|---|---|---|---|
 |Insert|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
 |Search|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
