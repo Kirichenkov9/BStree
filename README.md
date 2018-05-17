@@ -46,7 +46,7 @@ The benchmark of each open method is 10, 10 ^ 2, 10 ^ 3, 10 ^ 4, 10 ^ 5, 10 ^ 6,
 
 
 |Operations|Print|Print pre order|Print in oreder|Print post order|Insert|Remove|Exist|Save in file|Load from file|
-|---|---|---|---|---|---|
+|---|---|---|---|---|---|---|---|---|
 |10        |     |                |               |               |      |       |     |            |             |
 |10^2        |     |                |               |               |      |       |     |            |             |
 |10^3      |     |                |               |               |      |       |     |            |             |
@@ -55,3 +55,4 @@ The benchmark of each open method is 10, 10 ^ 2, 10 ^ 3, 10 ^ 4, 10 ^ 5, 10 ^ 6,
 |10^6        |     |                |               |               |      |       |     |            |             |
 |10^7        |     |                |               |               |      |       |     |            |             |
 |10^8      |     |                |               |               |      |       |     |            |             |
+|10^9        |:x: |:x:                |  :x:             |   :x:            | :x:     |    :x:   | :x:    |    :x:        |             |
