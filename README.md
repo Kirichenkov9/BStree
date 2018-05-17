@@ -3,7 +3,7 @@
 
 **This is a project of realization Binary Search tree**
 
-*In this project the following opportunities are realized:*
+In this project are realized the following opportunities:
 
 * displaying the tree on the screen
 * displaying the list of tree nodes (3 orders: pre, in, post)
