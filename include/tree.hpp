@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
+#include <cstring>
 #include <cstring>
 
 namespace BStree {
