@@ -38,29 +38,16 @@ $ ./example<number>
 
 The benchmark of each open method is 10, 10 ^ 2, 10 ^ 3, 10 ^ 4, 10 ^ 5, 10 ^ 6, 10 ^ 7, 10 ^ 8 and 10^9 elements.
 
-|Operations|10|10^2|10^3|10^4|10^5|10^6|10^7|10^8|10^9|
-|---|---|---|---|---|---|
-|Print|||||||||:x:||
-|Print pre order|||||||||:x:||
-|Print in order|||||||||:x:||
-|Print post order|||||||||:x:||
-|Insert|||||||||:x:||
-|Remove|||||||||:x:||
-|Save in file|||||||||:x:||
-|Load from file|||||||||:x:||
-|Exist|||||||||:x:||
-
-
-|Operations|Binary Search Tree|AVL Tree|Red Black Tree|Splay Tree|Trie|
+|Operations| 10 | 10^2 | 10^3 | 10^4 | 10^5 | 10^6 | 10^7 | 10^8 | 10^9 |
 |---|---|---|---|---|---|
 |Insert|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
 |Search|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|Delete|:x:|:x:|:x:|:x:|:x:|
-|Pre Order Traversal|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:||
-|In Order Traversal|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:||
-|Post Order Traversal|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:||
-|Breadth First Traversal|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:||
-|In Order Predecessor|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:||
-|In Order Successor|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:||
+|Remove|:x:|:x:|:x:|:x:|:x:|
+|Print|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:||
+|Print pre order|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:||
+|Print in order|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:||
+|Print post order|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:||
+|Save in file|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:||
+|Load from file|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:||
 
 
