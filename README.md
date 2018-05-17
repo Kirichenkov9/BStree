@@ -4,15 +4,14 @@
 **This is a project of realization Binary Search tree**
 
 *In this project the following opportunities are realized:*
-```
-*displaying the tree on the screen
+
+* displaying the tree on the screen
 * displaying the list of tree nodes (3 orders: pre, in, post)
-*adding a node to the tree
+* adding a node to the tree
 * removing the node from the tree
 * saving the tree to the file
 * loading the tree from the file
 * existing of node
-```
 
 
 ## Building of a project:
