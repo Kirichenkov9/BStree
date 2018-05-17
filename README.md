@@ -38,17 +38,18 @@ $ ./example<number>
 ## Benchmark
 
 The benchmark of each open method is 10, 10 ^ 2, 10 ^ 3, 10 ^ 4, 10 ^ 5, 10 ^ 6, 10 ^ 7, 10 ^ 8 and 10^9 elements.
+
 |Operations|10|10^2|10^3|10^4|10^5|10^6|10^7|10^8|10^9|
 |---|---|---|---|---|---|
-|Print|||||||||:x:|
-|Print pre order|||||||||:x:|
-|Print in order|||||||||:x:|
-|Print post order|||||||||:x:|
-|Insert|||||||||:x:|
-|Remove|||||||||:x:|
-|Save in file|||||||||:x:|
-|Load from file|||||||||:x:|
-|Exist|||||||||:x:|
+|Print|||||||||:x:||
+|Print pre order|||||||||:x:||
+|Print in order|||||||||:x:||
+|Print post order|||||||||:x:||
+|Insert|||||||||:x:||
+|Remove|||||||||:x:||
+|Save in file|||||||||:x:||
+|Load from file|||||||||:x:||
+|Exist|||||||||:x:||
 
 
 
