@@ -17,7 +17,7 @@ int main() {
     clock_t  t_start;
     clock_t  t_end;
     
-    for (size_t exp = 1; exp < 9;  exp ++ ) {
+    for (size_t exp = 5; exp < 9;  exp ++ ) {
     	BStree::Tree<int> tree;
         int value;
         for(size_t num_el = 1; num_el <= pow(10,exp); num_el++) {
