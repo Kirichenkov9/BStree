@@ -19,11 +19,11 @@ int main() {
         }
         t_start = clock();
         for(size_t num_el = 1; num_el <= pow(10,exp); num_el++) {
-        value = rand();
-        tree.search(value);
-    }
+            value = rand();
+            tree.search(value);
+        }
         t_end= clock() - t_start;
         std::cout<<"10^"<<exp<<" : "<<(float)t_end/CLOCKS_PER_SEC<<std::endl;
-    
-}
+
+    }
 }

@@ -40,5 +40,5 @@ int main() {
         t_end = clock() - t_start;
         fout<<"10^"<<exp<<" : "<<(float)t_end/CLOCKS_PER_SEC<<std::endl;
         fout.close();
-}
+    }
 }

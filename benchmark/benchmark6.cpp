@@ -21,9 +21,9 @@ int main() {
         BStree::Tree<int> tree;
         for(size_t num_el = 1; num_el <= pow(10,exp); num_el++) {
             value  = rand();
-            while(!tree.add(value)){
-            	value = rand();
-            	tree.add(value);
+            while(!tree.add(value)) {
+                value = rand();
+                tree.add(value);
             }
 
         }
@@ -52,7 +52,7 @@ int main() {
         tree.print();
         t_end= clock() - t_start;
         fout<<"10^"<<exp<<" : "<<(float)t_end/CLOCKS_PER_SEC<<std::endl;
-        
+
         fout<<"Print pre order:"<<std::endl;
         t_start = clock();
         tree.print_order(std::cout, BStree::traversal_order::pre);

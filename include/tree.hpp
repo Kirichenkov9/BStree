@@ -35,8 +35,8 @@ public:
     auto save(const std::string& path) -> bool;
     auto load(const std::string& path) -> bool;
     auto print_order(std::ostream& stream, traversal_order order) const -> std::ostream&;
-    template <typename T1>   
-    auto friend operator<<(std::ostream& stream, const Tree<T1>& tree) -> std::ostream&{
+    template <typename T1>
+    auto friend operator<<(std::ostream& stream, const Tree<T1>& tree) -> std::ostream& {
         return tree.print_order(stream, BStree::traversal_order::pre);
     }
     template <typename T2>
@@ -285,7 +285,7 @@ auto BStree::Tree<T>::save(const std::string& filename) -> bool {
 }
 
 template <typename T>
-auto BStree::Tree<T>::load(const std::string& filename) -> bool{    
+auto BStree::Tree<T>::load(const std::string& filename) -> bool{
     std::ifstream fin(filename.c_str());
     if (!fin.is_open())
         return false;

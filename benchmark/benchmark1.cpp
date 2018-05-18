@@ -17,14 +17,14 @@ int main() {
             value  = rand();
             tree.add(value);
         }
-        t_end= clock() - t_start;  
+        t_end= clock() - t_start;
         std::cout<<"10^"<<exp<<" : "<<(float)t_end/CLOCKS_PER_SEC<<std::endl;
         std::cout<<"Removing:"<<std::endl;
-         for(size_t num_el = 1; num_el <= pow(10,exp); num_el++) {
+        for(size_t num_el = 1; num_el <= pow(10,exp); num_el++) {
             value  = rand();
             tree.remove(value);
         }
-        t_end= clock() - t_start;  
+        t_end= clock() - t_start;
         std::cout<<"10^"<<exp<<" : "<<(float)t_end/CLOCKS_PER_SEC<<std::endl;
-}
+    }
 }

@@ -103,21 +103,21 @@ TEST_CASE("Existence of node") {
     REQUIRE(tree.search(100) == false);
 }
 
-TEST_CASE("Saving in and loading from file"){
-	BStree::Tree<int> tree = { 8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15 };
-	BStree::Tree<int> tree1;
+TEST_CASE("Saving in and loading from file") {
+    BStree::Tree<int> tree = { 8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15 };
+    BStree::Tree<int> tree1;
 
     std::ofstream fout("answer.txt");
     fout << "Да";
     fout.close();
 
-	std::freopen("answer.txt", "r", stdin);
-	
-	tree.save("BStree.txt");
-	tree1.load("BStree.txt");
+    std::freopen("answer.txt", "r", stdin);
 
-	std::string text = "8  4  2  1  3  6  5  7  12  10  9  11  14  13  15  ";
-	std::string buffer;
+    tree.save("BStree.txt");
+    tree1.load("BStree.txt");
+
+    std::string text = "8  4  2  1  3  6  5  7  12  10  9  11  14  13  15  ";
+    std::string buffer;
     std::stringstream out (buffer);
 
     out<<tree1;

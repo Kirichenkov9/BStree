@@ -23,5 +23,5 @@ int main() {
         tree.print();
         t_end= clock() - t_start;
         out<<"10^"<<exp<<" : "<<(float)t_end/CLOCKS_PER_SEC<<std::endl;
-}
+    }
 }
