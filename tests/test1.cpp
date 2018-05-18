@@ -1,6 +1,6 @@
 #include "catch.hpp"
 #include <tree.hpp>
-#include <cstring>
+#include <string>
 #include <sstream>
 #include <iostream>
 #include <fstream>

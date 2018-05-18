@@ -12,14 +12,14 @@ int main() {
     clock_t  t_end;
     BStree::Tree<int> tree;
     std::freopen("tree_bench.txt", "w", stdout);
-    std::ofstream fout("bench4.txt");
     for (size_t exp = 1; exp < 9;  exp ++ ) {
         int value;
         for(size_t num_el = 1; num_el <= pow(10,exp); num_el++) {
             value  = rand();
             tree.add(value);
         }
-       fout<<"Print pre order:"<<std::endl;
+        std::ofstream fout("bench4.txt");
+        fout<<"Print pre order:"<<std::endl;
         t_start = clock();
         tree.print_order(std::cout, BStree::traversal_order::pre);
         t_end= clock() - t_start;
@@ -39,5 +39,6 @@ int main() {
         std::cout<<std::endl;
         t_end = clock() - t_start;
         fout<<"10^"<<exp<<" : "<<(float)t_end/CLOCKS_PER_SEC<<std::endl;
+        fout.close();
 }
 }

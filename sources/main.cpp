@@ -1,6 +1,6 @@
 #include <iostream>
 #include <locale>
-#include <cstring>
+#include <string>
 #include "tree.hpp"
 
 auto showmenu() -> void;

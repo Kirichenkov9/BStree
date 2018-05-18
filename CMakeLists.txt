@@ -5,18 +5,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(BUILD_EXAMPLES "Build examples" OFF)
 option(BUILD_TESTS "Build tests" OFF)
+option(BUILD_BENCHMARK "Build benchmark" OFF)
+
 
 project(BStree)
 
 add_library(BStree STATIC ${CMAKE_CURRENT_SOURCE_DIR}/sources/tree.cpp)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-add_executable(bench1 ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/bench1.cpp)
-add_executable(bench2 ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/bench2.cpp)
-add_executable(bench3 ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/bench3.cpp)
-add_executable(bench4 ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/bench4.cpp)
-add_executable(bench5 ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/bench5.cpp)
-add_executable(benchmark_add ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark_add.cpp)
+
 add_executable(main ${CMAKE_CURRENT_SOURCE_DIR}/sources/main.cpp)
 target_link_libraries(main BStree)
 
@@ -49,4 +46,15 @@ file(GLOB ${PROJECT_NAME}_TEST_SOURCES tests/*.cpp)
 add_executable(check ${${PROJECT_NAME}_TEST_SOURCES})
 target_link_libraries(check ${PROJECT_NAME} ${DEPENDS_LIBRARIES})
 add_test(NAME check COMMAND check "-s" "-r" "compact" "--use-colour" "yes") 
+endif()
+
+
+
+if(BUILD_BENCHMARK)
+add_executable(benchmark1 ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark1.cpp)
+add_executable(benchmark2 ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark2.cpp)
+add_executable(benchmark3 ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark3.cpp)
+add_executable(benchmark4 ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark4.cpp)
+add_executable(benchmark5 ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark5.cpp)
+add_executable(benchmark6 ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark6.cpp)
 endif()
