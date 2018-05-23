@@ -115,7 +115,7 @@ auto BStree::Tree<T>::add(T value) -> bool {
 
         }
     }
-    return;
+    return true;
 }
 
 template <typename T>
