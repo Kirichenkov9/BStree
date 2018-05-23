@@ -115,6 +115,7 @@ auto BStree::Tree<T>::add(T value) -> bool {
 
         }
     }
+    return;
 }
 
 template <typename T>
@@ -204,6 +205,7 @@ auto BStree::Tree<T>::destructor(Node<T>* node) -> void {
         destructor(node->right);
         delete node;
     }
+    node = nullptr;
 }
 
 template <typename T>

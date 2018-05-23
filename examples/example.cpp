@@ -79,7 +79,12 @@ int main() {
     std::cout<<std::endl;
 
 
+    std::ofstream fout("answer.txt");
+    fout << "Да";
+    fout.close();
 
+    std::freopen("answer.txt", "r", stdin);
+    
     std::cout<<"\033[0;32mСохраним дерево 1 в файл BStree.txt \033[0;34m"<<std::endl;
     tree.save("BStree.txt");
     std::cout<<"\033[0;32mЗагрузим дерево из файла BStree.txt и присвоим его дереву 2 \033[0;34m"<<std::endl;
