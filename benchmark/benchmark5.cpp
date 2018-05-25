@@ -13,7 +13,7 @@ int main() {
     clock_t  t_start;
     clock_t  t_end;
     BStree::Tree<int> tree;
-    for (size_t exp = 9; exp < 10;  exp ++ ) {
+    for (size_t exp = 1; exp < 9;  exp ++ ) {
         std::freopen("answer.txt", "r", stdin);
         int value;
         t_start = clock();

@@ -1,0 +1,388 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - test.info - /home/anton/workspace/BStree/gcov/tree.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../index.html">top level</a> - <a href="index.html">home/anton/workspace/BStree/gcov</a> - tree.hpp<span style="font-size: 80%;"> (source / <a href="tree.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">test.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">157</td>
+            <td class="headerCovTableEntry">157</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-05-26 01:26:34</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &lt;iostream&gt;</a>
+<span class="lineNum">       2 </span>            : #include &lt;fstream&gt;
+<span class="lineNum">       3 </span>            : #include &lt;sstream&gt;
+<span class="lineNum">       4 </span>            : #include &lt;string&gt;
+<span class="lineNum">       5 </span>            : 
+<span class="lineNum">       6 </span>            : namespace BStree {
+<span class="lineNum">       7 </span>            : template &lt;typename T&gt;
+<span class="lineNum">       8 </span>            : struct Node {
+<span class="lineNum">       9 </span>            :     T data ;
+<a name="10"><span class="lineNum">      10 </span>            :     Node&lt;T&gt;* left;</a>
+<span class="lineNum">      11 </span>            :     Node&lt;T&gt;* right;
+<span class="lineNum">      12 </span><span class="lineCov">        108 :     Node(T value) : left{nullptr}, right{nullptr} {</span>
+<span class="lineNum">      13 </span><span class="lineCov">        108 :         data = value;</span>
+<span class="lineNum">      14 </span><span class="lineCov">        108 :     }</span>
+<span class="lineNum">      15 </span>            : };
+<span class="lineNum">      16 </span>            : enum class traversal_order {pre, in, post};
+<span class="lineNum">      17 </span>            : 
+<span class="lineNum">      18 </span>            : template &lt;typename T&gt;
+<span class="lineNum">      19 </span>            : class Tree {
+<span class="lineNum">      20 </span>            :     Node&lt;T&gt;* root;
+<span class="lineNum">      21 </span>            :     auto print_root(const Node&lt;T&gt;* node) -&gt; void;
+<a name="22"><span class="lineNum">      22 </span>            :     auto destructor(Node&lt;T&gt;* node) -&gt; void;</a>
+<span class="lineNum">      23 </span>            : public:
+<span class="lineNum">      24 </span><span class="lineCov">          5 :     Tree() {</span>
+<span class="lineNum">      25 </span><span class="lineCov">          5 :         root = nullptr;</span>
+<span class="lineNum">      26 </span><span class="lineCov">          5 :     }</span>
+<span class="lineNum">      27 </span>            :     Tree(std::initializer_list&lt;T&gt; list);
+<span class="lineNum">      28 </span>            :     Tree(const Tree&lt;T&gt;&amp; tree);
+<span class="lineNum">      29 </span>            :     auto remove(T value)-&gt;bool;
+<span class="lineNum">      30 </span>            :     auto search(T value) const -&gt; bool;
+<span class="lineNum">      31 </span>            :     auto swap(Tree&lt;T&gt;&amp; tree) -&gt; void;
+<span class="lineNum">      32 </span>            :     auto add(T value) -&gt; bool;
+<span class="lineNum">      33 </span>            :     auto empty() const -&gt; bool;
+<span class="lineNum">      34 </span>            :     auto print() -&gt; void;
+<span class="lineNum">      35 </span>            :     auto save(const std::string&amp; path) -&gt; bool;
+<span class="lineNum">      36 </span>            :     auto load(const std::string&amp; path) -&gt; bool;
+<a name="37"><span class="lineNum">      37 </span>            :     auto print_order(std::ostream&amp; stream, traversal_order order) const -&gt; std::ostream&amp;;</a>
+<span class="lineNum">      38 </span>            :     template &lt;typename T1&gt;
+<span class="lineNum">      39 </span><span class="lineCov">          9 :     auto friend operator&lt;&lt;(std::ostream&amp; stream, const Tree&lt;T1&gt;&amp; tree) -&gt; std::ostream&amp; {</span>
+<span class="lineNum">      40 </span><span class="lineCov">          9 :         return tree.print_order(stream, BStree::traversal_order::pre);</span>
+<span class="lineNum">      41 </span>            :     }
+<span class="lineNum">      42 </span>            :     template &lt;typename T2&gt;
+<span class="lineNum">      43 </span>            :     auto operator=(const Tree&lt;T2&gt;&amp; tree) -&gt; Tree&lt;T2&gt;&amp; {
+<span class="lineNum">      44 </span>            :         destructor(root);
+<span class="lineNum">      45 </span>            :         Tree tmp{tree};
+<span class="lineNum">      46 </span>            :         this-&gt;swap(tmp);
+<a name="47"><span class="lineNum">      47 </span>            :         return *this;</a>
+<span class="lineNum">      48 </span>            :     }
+<span class="lineNum">      49 </span><span class="lineCov">         18 :     ~Tree() {</span>
+<span class="lineNum">      50 </span><span class="lineCov">         18 :         destructor(root);</span>
+<span class="lineNum">      51 </span><span class="lineCov">         18 :     }</span>
+<span class="lineNum">      52 </span>            : 
+<span class="lineNum">      53 </span>            : };
+<span class="lineNum">      54 </span>            : }
+<a name="55"><span class="lineNum">      55 </span>            : </a>
+<span class="lineNum">      56 </span>            : template &lt;typename T&gt;
+<span class="lineNum">      57 </span><span class="lineCov">         13 : BStree::Tree&lt;T&gt;::Tree(std::initializer_list&lt;T&gt; list) {</span>
+<span class="lineNum">      58 </span><span class="lineCov">         13 :     root = nullptr;</span>
+<span class="lineNum">      59 </span><span class="lineCov">        108 :     for (auto x: list ) {</span>
+<span class="lineNum">      60 </span><span class="lineCov">         95 :         this-&gt;add(x);</span>
+<span class="lineNum">      61 </span>            :     }
+<span class="lineNum">      62 </span><span class="lineCov">         13 : }</span>
+<a name="63"><span class="lineNum">      63 </span>            : </a>
+<span class="lineNum">      64 </span>            : template &lt;typename T&gt;
+<span class="lineNum">      65 </span><span class="lineCov">          1 : BStree::Tree&lt;T&gt;::Tree(const Tree&lt;T&gt;&amp; tree) : Tree{} {</span>
+<span class="lineNum">      66 </span><span class="lineCov">          2 :     std::string str;</span>
+<span class="lineNum">      67 </span><span class="lineCov">          2 :     std::stringstream out(str);</span>
+<span class="lineNum">      68 </span><span class="lineCov">          1 :     out &lt;&lt; tree;</span>
+<span class="lineNum">      69 </span>            :     T value;
+<span class="lineNum">      70 </span><span class="lineCov">         11 :     while(out) {</span>
+<span class="lineNum">      71 </span><span class="lineCov">          5 :         out &gt;&gt; value;</span>
+<span class="lineNum">      72 </span><span class="lineCov">          5 :         this-&gt;add(value);</span>
+<span class="lineNum">      73 </span>            :     }
+<span class="lineNum">      74 </span><span class="lineCov">          1 : }</span>
+<a name="75"><span class="lineNum">      75 </span>            : </a>
+<span class="lineNum">      76 </span>            : template &lt;typename T&gt;
+<span class="lineNum">      77 </span><span class="lineCov">        123 : auto BStree::Tree&lt;T&gt;::search(T value) const -&gt; bool {</span>
+<span class="lineNum">      78 </span><span class="lineCov">        123 :     if(root == nullptr)</span>
+<span class="lineNum">      79 </span><span class="lineCov">         15 :         return false;</span>
+<span class="lineNum">      80 </span><span class="lineCov">        108 :     Node&lt;T&gt;* node = root;</span>
+<span class="lineNum">      81 </span><span class="lineCov">        412 :     while (node-&gt;data != value) {</span>
+<span class="lineNum">      82 </span><span class="lineCov">        247 :         if(node-&gt;data &gt; value)</span>
+<span class="lineNum">      83 </span><span class="lineCov">        102 :             node = node -&gt; left;</span>
+<span class="lineNum">      84 </span>            :         else
+<span class="lineNum">      85 </span><span class="lineCov">        145 :             node = node -&gt; right;</span>
+<span class="lineNum">      86 </span><span class="lineCov">        247 :         if(node == nullptr)</span>
+<span class="lineNum">      87 </span><span class="lineCov">         95 :             return false;</span>
+<span class="lineNum">      88 </span>            :     }
+<span class="lineNum">      89 </span><span class="lineCov">         13 :     return true;</span>
+<span class="lineNum">      90 </span>            : }
+<a name="91"><span class="lineNum">      91 </span>            : </a>
+<span class="lineNum">      92 </span>            : template &lt;typename T&gt;
+<span class="lineNum">      93 </span><span class="lineCov">        110 : auto BStree::Tree&lt;T&gt;::add(T value) -&gt; bool {</span>
+<span class="lineNum">      94 </span><span class="lineCov">        110 :     if(search(value))</span>
+<span class="lineNum">      95 </span><span class="lineCov">          2 :         return false;</span>
+<span class="lineNum">      96 </span><span class="lineCov">        108 :     if (root == nullptr) {</span>
+<span class="lineNum">      97 </span><span class="lineCov">         15 :         root = new Node&lt;T&gt; {value};</span>
+<span class="lineNum">      98 </span><span class="lineCov">         15 :         return true;</span>
+<span class="lineNum">      99 </span>            :     }
+<span class="lineNum">     100 </span><span class="lineCov">         93 :     Node&lt;T&gt;* node = root;</span>
+<span class="lineNum">     101 </span><span class="lineCov">        347 :     while(node != nullptr) {</span>
+<span class="lineNum">     102 </span><span class="lineCov">        220 :         if(node-&gt;data &gt; value ) {</span>
+<span class="lineNum">     103 </span><span class="lineCov">         92 :             if(node -&gt; left == nullptr) {</span>
+<span class="lineNum">     104 </span><span class="lineCov">         36 :                 node -&gt; left = new Node&lt;T&gt; {value};</span>
+<span class="lineNum">     105 </span><span class="lineCov">         36 :                 break;</span>
+<span class="lineNum">     106 </span>            :             }
+<span class="lineNum">     107 </span><span class="lineCov">         56 :             node = node -&gt; left;</span>
+<span class="lineNum">     108 </span>            :         } else {
+<span class="lineNum">     109 </span>            : 
+<span class="lineNum">     110 </span><span class="lineCov">        128 :             if(node -&gt; right == nullptr) {</span>
+<span class="lineNum">     111 </span><span class="lineCov">         57 :                 node -&gt; right = new Node&lt;T&gt; {value};</span>
+<span class="lineNum">     112 </span><span class="lineCov">         57 :                 break;</span>
+<span class="lineNum">     113 </span>            :             }
+<span class="lineNum">     114 </span><span class="lineCov">         71 :             node = node -&gt; right;</span>
+<span class="lineNum">     115 </span>            : 
+<span class="lineNum">     116 </span>            :         }    
+<span class="lineNum">     117 </span>            :     }
+<span class="lineNum">     118 </span><span class="lineCov">         93 :     return true;</span>
+<span class="lineNum">     119 </span>            : }
+<span class="lineNum">     120 </span>            : 
+<span class="lineNum">     121 </span>            : template &lt;typename T&gt;
+<span class="lineNum">     122 </span>            : auto BStree::Tree&lt;T&gt;::print() -&gt; void {
+<span class="lineNum">     123 </span>            :     if(root == nullptr) {
+<span class="lineNum">     124 </span>            :         std::cout &lt;&lt;&quot;\033[1;31mДерево пусто!\033[0;37m\U0001F631\033[0;34m&quot; &lt;&lt;std::endl;
+<span class="lineNum">     125 </span>            :         return;
+<span class="lineNum">     126 </span>            :     }
+<span class="lineNum">     127 </span>            :     print_root(root);
+<span class="lineNum">     128 </span>            : }
+<span class="lineNum">     129 </span>            : 
+<span class="lineNum">     130 </span>            : template &lt;typename T&gt;
+<span class="lineNum">     131 </span>            : auto BStree::Tree&lt;T&gt;::print_root(const Node&lt;T&gt;* node ) -&gt; void {
+<span class="lineNum">     132 </span>            :     if(node != nullptr) {
+<span class="lineNum">     133 </span>            :         static size_t  indent = 0;
+<span class="lineNum">     134 </span>            :         if(node == root) {
+<span class="lineNum">     135 </span>            :             print_root(node-&gt;right);
+<span class="lineNum">     136 </span>            :             std::cout&lt;&lt;std::endl;
+<span class="lineNum">     137 </span>            :             std::cout&lt;&lt;&quot; \033[1;32m&quot;&lt;&lt;node-&gt;data;
+<span class="lineNum">     138 </span>            :             std::cout &lt;&lt; std::endl &lt;&lt; std::endl;
+<span class="lineNum">     139 </span>            :             print_root(node-&gt;left);
+<span class="lineNum">     140 </span>            :             return;
+<span class="lineNum">     141 </span>            :         }
+<span class="lineNum">     142 </span>            :         indent++;
+<span class="lineNum">     143 </span>            :         print_root(node-&gt;right);
+<span class="lineNum">     144 </span>            :         for(size_t i = 0; i &lt; indent; i++)
+<span class="lineNum">     145 </span>            :             std::cout&lt;&lt;&quot;     &quot;;
+<span class="lineNum">     146 </span>            :         std::cout&lt;&lt;&quot;\033[0;33m\U00002053 \033[1;32m&quot;&lt;&lt;node-&gt;data&lt;&lt;std::endl;
+<span class="lineNum">     147 </span>            :         print_root(node-&gt;left);
+<span class="lineNum">     148 </span>            :         indent--;
+<span class="lineNum">     149 </span>            :         return;
+<span class="lineNum">     150 </span>            :     }
+<span class="lineNum">     151 </span>            : }
+<a name="152"><span class="lineNum">     152 </span>            : </a>
+<span class="lineNum">     153 </span>            : template &lt;typename T&gt;
+<span class="lineNum">     154 </span><span class="lineCov">        163 : auto print_pre(std::ostream&amp; out, const BStree::Node&lt;T&gt;* node) -&gt; std::ostream&amp; {</span>
+<span class="lineNum">     155 </span><span class="lineCov">        163 :     if(node != nullptr) {</span>
+<span class="lineNum">     156 </span><span class="lineCov">         76 :         out &lt;&lt; node-&gt;data&lt;&lt;&quot;  &quot;;</span>
+<span class="lineNum">     157 </span><span class="lineCov">         76 :         print_pre(out, node-&gt;left);</span>
+<span class="lineNum">     158 </span><span class="lineCov">         76 :         print_pre(out, node-&gt;right);</span>
+<span class="lineNum">     159 </span>            :     }
+<span class="lineNum">     160 </span><span class="lineCov">        163 :     return out;</span>
+<span class="lineNum">     161 </span>            : }
+<a name="162"><span class="lineNum">     162 </span>            : </a>
+<span class="lineNum">     163 </span>            : template &lt;typename T&gt;
+<span class="lineNum">     164 </span><span class="lineCov">         31 : auto print_in(std::ostream&amp; out, const BStree::Node&lt;T&gt;* node)-&gt; std::ostream&amp; {</span>
+<span class="lineNum">     165 </span><span class="lineCov">         31 :     if(node != nullptr) {</span>
+<span class="lineNum">     166 </span><span class="lineCov">         15 :         print_in(out,node-&gt;left);</span>
+<span class="lineNum">     167 </span><span class="lineCov">         15 :         out &lt;&lt; node-&gt;data&lt;&lt;&quot;  &quot;;</span>
+<span class="lineNum">     168 </span><span class="lineCov">         15 :         print_in(out,node-&gt;right);</span>
+<span class="lineNum">     169 </span>            :     }
+<span class="lineNum">     170 </span><span class="lineCov">         31 :     return out;</span>
+<span class="lineNum">     171 </span>            : }
+<a name="172"><span class="lineNum">     172 </span>            : </a>
+<span class="lineNum">     173 </span>            : template &lt;typename T&gt;
+<span class="lineNum">     174 </span><span class="lineCov">         31 : auto print_post(std::ostream&amp; out, const BStree::Node&lt;T&gt;* node)  -&gt; std::ostream&amp; {</span>
+<span class="lineNum">     175 </span><span class="lineCov">         31 :     if(node != nullptr) {</span>
+<span class="lineNum">     176 </span><span class="lineCov">         15 :         print_post(out,node-&gt;left);</span>
+<span class="lineNum">     177 </span><span class="lineCov">         15 :         print_post(out,node-&gt;right);</span>
+<span class="lineNum">     178 </span><span class="lineCov">         15 :         out &lt;&lt; node-&gt;data&lt;&lt;&quot;  &quot;;</span>
+<span class="lineNum">     179 </span>            :     }
+<span class="lineNum">     180 </span><span class="lineCov">         31 :     return out;</span>
+<span class="lineNum">     181 </span>            : }
+<span class="lineNum">     182 </span>            : 
+<a name="183"><span class="lineNum">     183 </span>            : </a>
+<span class="lineNum">     184 </span>            : template &lt;typename T&gt;
+<span class="lineNum">     185 </span><span class="lineCov">         13 : auto BStree::Tree&lt;T&gt;::print_order(std::ostream&amp; out, BStree::traversal_order order) const  -&gt; std::ostream&amp; {</span>
+<span class="lineNum">     186 </span><span class="lineCov">         13 :     if(order == traversal_order::pre) {</span>
+<span class="lineNum">     187 </span><span class="lineCov">         11 :         print_pre(out,root);</span>
+<span class="lineNum">     188 </span><span class="lineCov">          2 :     } else if (order == traversal_order::in) {</span>
+<span class="lineNum">     189 </span><span class="lineCov">          1 :         print_in(out,root);</span>
+<span class="lineNum">     190 </span>            :     } else {
+<span class="lineNum">     191 </span><span class="lineCov">          1 :         print_post(out,root);</span>
+<span class="lineNum">     192 </span>            :     }
+<span class="lineNum">     193 </span><span class="lineCov">         13 :     return out;</span>
+<span class="lineNum">     194 </span>            : }
+<a name="195"><span class="lineNum">     195 </span>            : </a>
+<span class="lineNum">     196 </span>            : template &lt;typename T&gt;
+<span class="lineNum">     197 </span><span class="lineCov">          1 : auto BStree::Tree&lt;T&gt;::swap(Tree&lt;T&gt;&amp; tree) -&gt; void {</span>
+<span class="lineNum">     198 </span><span class="lineCov">          1 :     std::swap(root, tree.root);</span>
+<span class="lineNum">     199 </span><span class="lineCov">          1 : }</span>
+<a name="200"><span class="lineNum">     200 </span>            : </a>
+<span class="lineNum">     201 </span>            : template &lt;typename T&gt;
+<span class="lineNum">     202 </span><span class="lineCov">        208 : auto BStree::Tree&lt;T&gt;::destructor(Node&lt;T&gt;* node) -&gt; void {</span>
+<span class="lineNum">     203 </span><span class="lineCov">        208 :     if(node != nullptr) {</span>
+<span class="lineNum">     204 </span><span class="lineCov">         94 :         destructor(node-&gt;left);</span>
+<span class="lineNum">     205 </span><span class="lineCov">         94 :         destructor(node-&gt;right);</span>
+<span class="lineNum">     206 </span><span class="lineCov">         94 :         delete node;</span>
+<span class="lineNum">     207 </span>            :     }
+<span class="lineNum">     208 </span><span class="lineCov">        208 :     node = nullptr;</span>
+<span class="lineNum">     209 </span><span class="lineCov">        208 : }</span>
+<a name="210"><span class="lineNum">     210 </span>            : </a>
+<span class="lineNum">     211 </span>            : template &lt;typename T&gt;
+<span class="lineNum">     212 </span><span class="lineCov">         11 : auto BStree::Tree&lt;T&gt;::remove(T value)-&gt; bool{</span>
+<span class="lineNum">     213 </span><span class="lineCov">         11 :     if(!search(value))</span>
+<span class="lineNum">     214 </span><span class="lineCov">          1 :         return false;</span>
+<span class="lineNum">     215 </span><span class="lineCov">         10 :     Node&lt;T&gt;* pointer = root;</span>
+<span class="lineNum">     216 </span><span class="lineCov">         10 :     Node&lt;T&gt;* parent  = nullptr;</span>
+<span class="lineNum">     217 </span>            : 
+<span class="lineNum">     218 </span><span class="lineCov">         44 :     while( pointer-&gt;data != value) {</span>
+<span class="lineNum">     219 </span><span class="lineCov">         17 :         parent = pointer;</span>
+<span class="lineNum">     220 </span><span class="lineCov">         17 :         if(value &lt; pointer-&gt;data)</span>
+<span class="lineNum">     221 </span><span class="lineCov">         10 :             pointer = pointer-&gt;left;</span>
+<span class="lineNum">     222 </span>            :         else
+<span class="lineNum">     223 </span><span class="lineCov">          7 :             pointer = pointer-&gt;right;</span>
+<span class="lineNum">     224 </span>            :     }
+<span class="lineNum">     225 </span>            : 
+<span class="lineNum">     226 </span><span class="lineCov">         10 :     Node&lt;T&gt;* removed = nullptr;</span>
+<span class="lineNum">     227 </span>            : 
+<span class="lineNum">     228 </span><span class="lineCov">         10 :     if (pointer-&gt;left == nullptr || pointer-&gt;right == nullptr) {</span>
+<span class="lineNum">     229 </span><span class="lineCov">          7 :         Node&lt;T&gt;* child = nullptr;</span>
+<span class="lineNum">     230 </span><span class="lineCov">          7 :         removed = pointer;</span>
+<span class="lineNum">     231 </span>            : 
+<span class="lineNum">     232 </span><span class="lineCov">          7 :         if(pointer-&gt;left != nullptr)</span>
+<span class="lineNum">     233 </span><span class="lineCov">          1 :             child = pointer-&gt;left;</span>
+<span class="lineNum">     234 </span><span class="lineCov">          6 :         else if(pointer-&gt;right != nullptr)</span>
+<span class="lineNum">     235 </span><span class="lineCov">          1 :             child = pointer-&gt;right;</span>
+<span class="lineNum">     236 </span>            : 
+<span class="lineNum">     237 </span><span class="lineCov">          7 :         if(parent == nullptr)</span>
+<span class="lineNum">     238 </span><span class="lineCov">          1 :             root = child;</span>
+<span class="lineNum">     239 </span>            :         else {
+<span class="lineNum">     240 </span><span class="lineCov">          6 :             if(parent-&gt;left == pointer)</span>
+<span class="lineNum">     241 </span><span class="lineCov">          4 :                 parent-&gt;left = child;</span>
+<span class="lineNum">     242 </span>            :             else
+<span class="lineNum">     243 </span><span class="lineCov">          2 :                 parent-&gt;right = child;</span>
+<span class="lineNum">     244 </span><span class="lineCov">          7 :         }</span>
+<span class="lineNum">     245 </span>            :     } else {
+<span class="lineNum">     246 </span><span class="lineCov">          3 :         Node&lt;T&gt;* mostLeft = pointer-&gt;right;</span>
+<span class="lineNum">     247 </span><span class="lineCov">          3 :         Node&lt;T&gt;* mostLeftParent = pointer;</span>
+<span class="lineNum">     248 </span>            : 
+<span class="lineNum">     249 </span><span class="lineCov">          7 :         while (mostLeft-&gt;left != nullptr) {</span>
+<span class="lineNum">     250 </span><span class="lineCov">          2 :             mostLeftParent = mostLeft;</span>
+<span class="lineNum">     251 </span><span class="lineCov">          2 :             mostLeft = mostLeft-&gt;left;</span>
+<span class="lineNum">     252 </span>            :         }
+<span class="lineNum">     253 </span>            : 
+<span class="lineNum">     254 </span><span class="lineCov">          3 :         pointer-&gt;data = mostLeft-&gt;data;</span>
+<span class="lineNum">     255 </span><span class="lineCov">          3 :         removed = mostLeft;</span>
+<span class="lineNum">     256 </span>            : 
+<span class="lineNum">     257 </span><span class="lineCov">          3 :         if(mostLeftParent-&gt;left == mostLeft)</span>
+<span class="lineNum">     258 </span><span class="lineCov">          2 :             mostLeftParent-&gt;left = nullptr;</span>
+<span class="lineNum">     259 </span>            :         else
+<span class="lineNum">     260 </span><span class="lineCov">          1 :             mostLeftParent-&gt;right = mostLeft-&gt;right;</span>
+<span class="lineNum">     261 </span>            :     }
+<span class="lineNum">     262 </span><span class="lineCov">         10 :     delete removed;</span>
+<span class="lineNum">     263 </span><span class="lineCov">         10 :     removed = nullptr;</span>
+<span class="lineNum">     264 </span><span class="lineCov">         10 :     return true;</span>
+<span class="lineNum">     265 </span>            : }
+<a name="266"><span class="lineNum">     266 </span>            : </a>
+<span class="lineNum">     267 </span>            : template &lt;typename T&gt;
+<span class="lineNum">     268 </span><span class="lineCov">          4 : auto BStree::Tree&lt;T&gt;::save(const std::string&amp; filename) -&gt; bool {</span>
+<span class="lineNum">     269 </span><span class="lineCov">          8 :     std::ifstream fin(filename.c_str());</span>
+<span class="lineNum">     270 </span><span class="lineCov">          4 :     if (!fin.is_open()) {</span>
+<span class="lineNum">     271 </span><span class="lineCov">          4 :         std::ofstream fout(filename.c_str());</span>
+<span class="lineNum">     272 </span><span class="lineCov">          2 :         fout &lt;&lt; *this;</span>
+<span class="lineNum">     273 </span><span class="lineCov">          2 :         fout.close();</span>
+<span class="lineNum">     274 </span><span class="lineCov">          2 :         return true;</span>
+<span class="lineNum">     275 </span>            :     } else {
+<span class="lineNum">     276 </span><span class="lineCov">          4 :         std::string answer;</span>
+<span class="lineNum">     277 </span><span class="lineCov">          2 :         std::cout &lt;&lt; &quot;\033[0;32mПерезаписать файл? (да, нет)\033[0;34m&quot; &lt;&lt; std::endl;</span>
+<span class="lineNum">     278 </span><span class="lineCov">          2 :         std::cin &gt;&gt; answer;</span>
+<span class="lineNum">     279 </span><span class="lineCov">          2 :         if ((answer == &quot;Да&quot;) || (answer == &quot;да&quot;) || (answer == &quot;ДА&quot;))  {</span>
+<span class="lineNum">     280 </span><span class="lineCov">          2 :             std::ofstream fout(filename.c_str());</span>
+<span class="lineNum">     281 </span><span class="lineCov">          1 :             fout &lt;&lt; *this;</span>
+<span class="lineNum">     282 </span><span class="lineCov">          1 :             fout.close();</span>
+<span class="lineNum">     283 </span><span class="lineCov">          1 :             return true;</span>
+<span class="lineNum">     284 </span>            :         } else
+<span class="lineNum">     285 </span><span class="lineCov">          1 :             return false;</span>
+<span class="lineNum">     286 </span>            :     }
+<span class="lineNum">     287 </span>            : }
+<a name="288"><span class="lineNum">     288 </span>            : </a>
+<span class="lineNum">     289 </span>            : template &lt;typename T&gt;
+<span class="lineNum">     290 </span><span class="lineCov">          3 : auto BStree::Tree&lt;T&gt;::load(const std::string&amp; filename) -&gt; bool{</span>
+<span class="lineNum">     291 </span><span class="lineCov">          6 :     std::ifstream fin(filename.c_str());</span>
+<span class="lineNum">     292 </span><span class="lineCov">          3 :     if (!fin.is_open())</span>
+<span class="lineNum">     293 </span><span class="lineCov">          1 :         return false;</span>
+<span class="lineNum">     294 </span><span class="lineCov">          2 :     destructor(root);</span>
+<span class="lineNum">     295 </span>            :     T value;
+<span class="lineNum">     296 </span><span class="lineCov">          2 :     fin &gt;&gt; value;</span>
+<span class="lineNum">     297 </span><span class="lineCov">          2 :     if(!fin)</span>
+<span class="lineNum">     298 </span><span class="lineCov">          1 :         return false;</span>
+<span class="lineNum">     299 </span><span class="lineCov">         11 :     while(fin) {</span>
+<span class="lineNum">     300 </span><span class="lineCov">          5 :         this-&gt;add(value);</span>
+<span class="lineNum">     301 </span><span class="lineCov">          5 :         fin &gt;&gt; value;</span>
+<span class="lineNum">     302 </span>            :     }
+<span class="lineNum">     303 </span><span class="lineCov">          1 :     return true;</span>
+<span class="lineNum">     304 </span>            : }
+<span class="lineNum">     305 </span>            : 
+<a name="306"><span class="lineNum">     306 </span>            : </a>
+<span class="lineNum">     307 </span>            : template &lt;typename T&gt;
+<span class="lineNum">     308 </span><span class="lineCov">          3 : auto BStree::Tree&lt;T&gt;::empty() const -&gt; bool {</span>
+<span class="lineNum">     309 </span><span class="lineCov">          3 :     if(root == nullptr)</span>
+<span class="lineNum">     310 </span><span class="lineCov">          2 :         return false;</span>
+<span class="lineNum">     311 </span><span class="lineCov">          1 :     return true;</span>
+<span class="lineNum">     312 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

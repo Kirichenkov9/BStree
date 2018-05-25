@@ -1,17 +1,15 @@
 ﻿cmake_minimum_required(VERSION 3.0)
 
-
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(BUILD_EXAMPLES "Build examples" OFF)
-option(BUILD_TESTS "Build	 tests" OFF)
+option(BUILD_TESTS "Build tests" OFF)
 option(BUILD_BENCHMARK "Build benchmark" OFF)
 
 
 project(BStree)
 
-add_library(BStree STATIC ${CMAKE_CURRENT_SOURCE_DIR}/sources/tree.cpp)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 
@@ -59,4 +57,3 @@ add_executable(benchmark4 ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark4.cpp)
 add_executable(benchmark5 ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark5.cpp)
 add_executable(benchmark6 ${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark6.cpp)
 endif()
-

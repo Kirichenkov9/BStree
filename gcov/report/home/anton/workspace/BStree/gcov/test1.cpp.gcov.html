@@ -1,0 +1,262 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - test.info - /home/anton/workspace/BStree/gcov/test1.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../index.html">top level</a> - <a href="index.html">home/anton/workspace/BStree/gcov</a> - test1.cpp<span style="font-size: 80%;"> (source / <a href="test1.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">test.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">133</td>
+            <td class="headerCovTableEntry">133</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-05-26 01:26:34</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;catch.hpp&quot;</a>
+<span class="lineNum">       2 </span>            : #include &quot;tree.hpp&quot;
+<span class="lineNum">       3 </span>            : #include &lt;string&gt;
+<span class="lineNum">       4 </span>            : #include &lt;sstream&gt;
+<span class="lineNum">       5 </span>            : #include &lt;iostream&gt;
+<span class="lineNum">       6 </span>            : #include &lt;fstream&gt;
+<a name="7"><span class="lineNum">       7 </span>            : </a>
+<span class="lineNum">       8 </span>            : 
+<span class="lineNum">       9 </span><span class="lineCov">          2 : TEST_CASE(&quot;Creating tree&quot;) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">          2 :     BStree::Tree&lt;int&gt; tree;</span>
+<span class="lineNum">      11 </span><span class="lineCov">          1 :     REQUIRE(tree.empty() == false);</span>
+<span class="lineNum">      12 </span><span class="lineCov">          2 :     BStree::Tree&lt;int&gt; tree_ = {1};</span>
+<span class="lineNum">      13 </span><span class="lineCov">          1 :     REQUIRE(tree_.empty() == true);</span>
+<a name="14"><span class="lineNum">      14 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">      15 </span>            : 
+<span class="lineNum">      16 </span><span class="lineCov">          2 : TEST_CASE(&quot;Copy tree&quot;){</span>
+<span class="lineNum">      17 </span><span class="lineCov">          2 :     BStree::Tree&lt;int&gt; tree  { 1, 2, 3, 4 };</span>
+<span class="lineNum">      18 </span><span class="lineCov">          2 :     BStree::Tree&lt;int&gt; tree1  {tree};</span>
+<span class="lineNum">      19 </span>            :     
+<span class="lineNum">      20 </span><span class="lineCov">          2 :     std::string result = &quot;1  2  3  4  &quot;;</span>
+<span class="lineNum">      21 </span><span class="lineCov">          2 :     std::string str;</span>
+<span class="lineNum">      22 </span>            : 
+<span class="lineNum">      23 </span><span class="lineCov">          2 :     std::stringstream out(str);</span>
+<span class="lineNum">      24 </span><span class="lineCov">          1 :     out &lt;&lt; tree1;</span>
+<span class="lineNum">      25 </span>            : 
+<span class="lineNum">      26 </span><span class="lineCov">          2 :     std::string result_;</span>
+<span class="lineNum">      27 </span><span class="lineCov">          1 :     getline(out, result_);</span>
+<span class="lineNum">      28 </span>            : 
+<span class="lineNum">      29 </span><span class="lineCov">          1 :     REQUIRE(result_ == result);</span>
+<a name="30"><span class="lineNum">      30 </span>            : </a>
+<span class="lineNum">      31 </span><span class="lineCov">          1 : }</span>
+<span class="lineNum">      32 </span><span class="lineCov">          2 : TEST_CASE(&quot;Printing of tree by various traversal order&quot;) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">          2 :     BStree::Tree&lt;int&gt; tree  { 8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15 };</span>
+<span class="lineNum">      34 </span><span class="lineCov">          2 :     std::string pre = &quot;8  4  2  1  3  6  5  7  12  10  9  11  14  13  15  &quot;;</span>
+<span class="lineNum">      35 </span><span class="lineCov">          2 :     std::string in = &quot;1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  &quot;;</span>
+<span class="lineNum">      36 </span><span class="lineCov">          2 :     std::string post = &quot;1  3  2  5  7  6  4  9  11  10  13  15  14  12  8  &quot;;</span>
+<span class="lineNum">      37 </span>            : 
+<span class="lineNum">      38 </span><span class="lineCov">          2 :     std::string str;</span>
+<span class="lineNum">      39 </span><span class="lineCov">          2 :     std::stringstream out(str);</span>
+<span class="lineNum">      40 </span>            : 
+<span class="lineNum">      41 </span><span class="lineCov">          1 :     tree.print_order(out, BStree::traversal_order::pre);</span>
+<span class="lineNum">      42 </span><span class="lineCov">          1 :     out&lt;&lt;std::endl;</span>
+<span class="lineNum">      43 </span><span class="lineCov">          1 :     tree.print_order(out, BStree::traversal_order::in);</span>
+<span class="lineNum">      44 </span><span class="lineCov">          1 :     out&lt;&lt;std::endl;</span>
+<span class="lineNum">      45 </span><span class="lineCov">          1 :     tree.print_order(out, BStree::traversal_order::post);</span>
+<span class="lineNum">      46 </span><span class="lineCov">          1 :     out&lt;&lt;std::endl;</span>
+<span class="lineNum">      47 </span>            : 
+<span class="lineNum">      48 </span><span class="lineCov">          2 :     std::string result_pre;</span>
+<span class="lineNum">      49 </span><span class="lineCov">          2 :     std::string result_in;</span>
+<span class="lineNum">      50 </span><span class="lineCov">          2 :     std::string result_post;</span>
+<span class="lineNum">      51 </span>            : 
+<span class="lineNum">      52 </span><span class="lineCov">          1 :     getline(out, result_pre);</span>
+<span class="lineNum">      53 </span><span class="lineCov">          1 :     getline(out, result_in);</span>
+<span class="lineNum">      54 </span><span class="lineCov">          1 :     getline(out, result_post);</span>
+<span class="lineNum">      55 </span>            : 
+<span class="lineNum">      56 </span><span class="lineCov">          1 :     REQUIRE(pre == result_pre);</span>
+<span class="lineNum">      57 </span><span class="lineCov">          1 :     REQUIRE(in == result_in);</span>
+<span class="lineNum">      58 </span><span class="lineCov">          1 :     REQUIRE(post == result_post);</span>
+<a name="59"><span class="lineNum">      59 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">      60 </span>            : 
+<span class="lineNum">      61 </span><span class="lineCov">          2 : TEST_CASE(&quot;Asigment of tree&quot;){</span>
+<span class="lineNum">      62 </span><span class="lineCov">          2 :     BStree::Tree&lt;int&gt; tree;</span>
+<span class="lineNum">      63 </span><span class="lineCov">          2 :     BStree::Tree&lt;int&gt; tree1 {1, 2, 3};</span>
+<span class="lineNum">      64 </span>            : 
+<span class="lineNum">      65 </span><span class="lineCov">          1 :     tree1 = tree;</span>
+<span class="lineNum">      66 </span><span class="lineCov">          1 :     REQUIRE(tree1.empty() == false);</span>
+<a name="67"><span class="lineNum">      67 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">      68 </span>            : 
+<span class="lineNum">      69 </span><span class="lineCov">          2 : TEST_CASE(&quot;Adding node&quot;) {</span>
+<span class="lineNum">      70 </span><span class="lineCov">          2 :     BStree::Tree&lt;int&gt; tree  { 25, 34, 12, 4, 7, 67, 78, 9, 0 };</span>
+<span class="lineNum">      71 </span>            : 
+<span class="lineNum">      72 </span><span class="lineCov">          1 :     tree.add(1);</span>
+<span class="lineNum">      73 </span><span class="lineCov">          1 :     tree.add(20);</span>
+<span class="lineNum">      74 </span><span class="lineCov">          1 :     tree.add(5);</span>
+<span class="lineNum">      75 </span>            : 
+<span class="lineNum">      76 </span>            : 
+<span class="lineNum">      77 </span><span class="lineCov">          2 :     std::string str;</span>
+<span class="lineNum">      78 </span><span class="lineCov">          2 :     std::stringstream out(str);</span>
+<span class="lineNum">      79 </span>            : 
+<span class="lineNum">      80 </span><span class="lineCov">          1 :     tree.print_order(out, BStree::traversal_order::pre);</span>
+<span class="lineNum">      81 </span>            : 
+<span class="lineNum">      82 </span><span class="lineCov">          2 :     std::string result = &quot;25  12  4  0  1  7  5  9  20  34  67  78  &quot;;</span>
+<span class="lineNum">      83 </span><span class="lineCov">          2 :     std::string result_of_adding;</span>
+<span class="lineNum">      84 </span><span class="lineCov">          1 :     getline(out, result_of_adding);</span>
+<span class="lineNum">      85 </span><span class="lineCov">          1 :     REQUIRE(tree.add(25) == false);</span>
+<span class="lineNum">      86 </span><span class="lineCov">          1 :     REQUIRE(tree.add(100) == true);</span>
+<span class="lineNum">      87 </span><span class="lineCov">          1 :     REQUIRE(result== result_of_adding);</span>
+<a name="88"><span class="lineNum">      88 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">      89 </span>            : 
+<span class="lineNum">      90 </span><span class="lineCov">          2 : TEST_CASE(&quot;Deleting node&quot;) {</span>
+<span class="lineNum">      91 </span><span class="lineCov">          2 :     BStree::Tree&lt;int&gt; tree  {8, 4, 12, 2, 6, 10, 14, 1, 3, 5 ,7, 9, 11, 13, 15 };</span>
+<span class="lineNum">      92 </span><span class="lineCov">          1 :     tree.remove(4);</span>
+<span class="lineNum">      93 </span><span class="lineCov">          1 :     tree.remove(1);</span>
+<span class="lineNum">      94 </span><span class="lineCov">          1 :     tree.remove(9);</span>
+<span class="lineNum">      95 </span><span class="lineCov">          1 :     tree.remove(8);</span>
+<span class="lineNum">      96 </span><span class="lineCov">          1 :     tree.remove(14);</span>
+<span class="lineNum">      97 </span><span class="lineCov">          1 :     tree.remove(2);</span>
+<span class="lineNum">      98 </span><span class="lineCov">          1 :     tree.remove(3);</span>
+<span class="lineNum">      99 </span>            :    
+<span class="lineNum">     100 </span><span class="lineCov">          2 :     BStree::Tree&lt;int&gt; tree1 {1};</span>
+<span class="lineNum">     101 </span>            :     
+<span class="lineNum">     102 </span><span class="lineCov">          1 :     REQUIRE(tree.remove(15) == true);</span>
+<span class="lineNum">     103 </span><span class="lineCov">          1 :     REQUIRE(tree1.remove(1) == true);</span>
+<span class="lineNum">     104 </span><span class="lineCov">          1 :     REQUIRE(tree.remove(100) == false);</span>
+<span class="lineNum">     105 </span><span class="lineCov">          1 :     REQUIRE(tree.remove(13) == true);</span>
+<a name="106"><span class="lineNum">     106 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     107 </span>            : 
+<span class="lineNum">     108 </span><span class="lineCov">          2 : TEST_CASE(&quot;Input in file&quot;) {</span>
+<span class="lineNum">     109 </span><span class="lineCov">          2 :     BStree::Tree&lt;int&gt; tree  { 8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15 };</span>
+<span class="lineNum">     110 </span>            : 
+<span class="lineNum">     111 </span><span class="lineCov">          2 :     std::string text = &quot;8  4  2  1  3  6  5  7  12  10  9  11  14  13  15  &quot;;</span>
+<span class="lineNum">     112 </span><span class="lineCov">          2 :     std::string buffer;</span>
+<span class="lineNum">     113 </span><span class="lineCov">          2 :     std::stringstream out (buffer);</span>
+<span class="lineNum">     114 </span>            : 
+<span class="lineNum">     115 </span><span class="lineCov">          1 :     out&lt;&lt;tree;</span>
+<span class="lineNum">     116 </span>            : 
+<span class="lineNum">     117 </span><span class="lineCov">          2 :     std::string result;</span>
+<span class="lineNum">     118 </span><span class="lineCov">          1 :     getline(out, result);</span>
+<span class="lineNum">     119 </span>            : 
+<span class="lineNum">     120 </span><span class="lineCov">          1 :     REQUIRE(result == text);</span>
+<a name="121"><span class="lineNum">     121 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     122 </span>            : 
+<span class="lineNum">     123 </span><span class="lineCov">          2 : TEST_CASE(&quot;Existence of node&quot;) {</span>
+<span class="lineNum">     124 </span><span class="lineCov">          2 :     BStree::Tree&lt;int&gt; tree  { 8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15 };</span>
+<span class="lineNum">     125 </span><span class="lineCov">          1 :     REQUIRE(tree.search(8) == true);</span>
+<span class="lineNum">     126 </span><span class="lineCov">          1 :     REQUIRE(tree.search(100) == false);</span>
+<a name="127"><span class="lineNum">     127 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     128 </span>            : 
+<span class="lineNum">     129 </span><span class="lineCov">          2 : TEST_CASE(&quot;Saving on file&quot;) {</span>
+<span class="lineNum">     130 </span><span class="lineCov">          2 :     BStree::Tree&lt;int&gt; tree  { 5, 2, 6, 8};</span>
+<span class="lineNum">     131 </span>            : 
+<span class="lineNum">     132 </span><span class="lineCov">          2 :     std::ofstream fout(&quot;answer.txt&quot;);</span>
+<span class="lineNum">     133 </span><span class="lineCov">          1 :     fout &lt;&lt;&quot;Да&quot;&lt;&lt;std::endl&lt;&lt;&quot;Нет&quot;;</span>
+<span class="lineNum">     134 </span><span class="lineCov">          1 :     fout.close();</span>
+<span class="lineNum">     135 </span>            : 
+<span class="lineNum">     136 </span><span class="lineCov">          1 :     std::freopen(&quot;answer.txt&quot;, &quot;r&quot;, stdin);</span>
+<span class="lineNum">     137 </span>            : 
+<span class="lineNum">     138 </span><span class="lineCov">          1 :     tree.save(&quot;BStree.txt&quot;);</span>
+<span class="lineNum">     139 </span><span class="lineCov">          1 :     REQUIRE( tree.save(&quot;BStree.txt&quot;) == true);</span>
+<span class="lineNum">     140 </span><span class="lineCov">          1 :     REQUIRE( tree.save(&quot;BStree.txt&quot;) == false);</span>
+<a name="141"><span class="lineNum">     141 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     142 </span>            : 
+<span class="lineNum">     143 </span><span class="lineCov">          2 : TEST_CASE(&quot;Loading from file&quot;){</span>
+<span class="lineNum">     144 </span><span class="lineCov">          2 :     std::string buffer;</span>
+<span class="lineNum">     145 </span><span class="lineCov">          2 :     std::stringstream out (buffer);</span>
+<span class="lineNum">     146 </span><span class="lineCov">          2 :     std::string result_ = &quot;1  2  3  4  5  &quot;;</span>
+<span class="lineNum">     147 </span>            : 
+<span class="lineNum">     148 </span><span class="lineCov">          2 :     BStree::Tree&lt;int&gt; tree {1, 2, 3, 4 ,5};</span>
+<span class="lineNum">     149 </span><span class="lineCov">          1 :     tree.save(&quot;Tree.txt&quot;);</span>
+<span class="lineNum">     150 </span>            : 
+<span class="lineNum">     151 </span><span class="lineCov">          2 :     BStree::Tree&lt;int&gt; tree1;</span>
+<span class="lineNum">     152 </span><span class="lineCov">          2 :     BStree::Tree&lt;int&gt; tree2;</span>
+<span class="lineNum">     153 </span>            : 
+<span class="lineNum">     154 </span><span class="lineCov">          1 :     tree1.load(&quot;Tree.txt&quot;);</span>
+<span class="lineNum">     155 </span>            : 
+<span class="lineNum">     156 </span><span class="lineCov">          1 :     out &lt;&lt; tree1;</span>
+<span class="lineNum">     157 </span><span class="lineCov">          2 :     std::string result;</span>
+<span class="lineNum">     158 </span><span class="lineCov">          1 :     getline(out,result);</span>
+<span class="lineNum">     159 </span><span class="lineCov">          2 :     std::ofstream fout(&quot;t.txt&quot;);</span>
+<span class="lineNum">     160 </span><span class="lineCov">          1 :     fout&lt;&lt;&quot;a3&quot;;</span>
+<span class="lineNum">     161 </span><span class="lineCov">          1 :     fout.close();</span>
+<span class="lineNum">     162 </span>            : 
+<span class="lineNum">     163 </span><span class="lineCov">          1 :     REQUIRE( result_ == result);</span>
+<span class="lineNum">     164 </span><span class="lineCov">          1 :     REQUIRE( tree.load(&quot;List.txt&quot;) == false);</span>
+<span class="lineNum">     165 </span><span class="lineCov">          1 :     REQUIRE( tree2.load(&quot;t.txt&quot;) == false);</span>
+<a name="166"><span class="lineNum">     166 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     167 </span>            : 
+<span class="lineNum">     168 </span><span class="lineCov">          2 : TEST_CASE(&quot;Swap&quot;){</span>
+<span class="lineNum">     169 </span><span class="lineCov">          2 :     BStree::Tree&lt;int&gt; tree{1, 2, 3 ,4};</span>
+<span class="lineNum">     170 </span><span class="lineCov">          2 :     BStree::Tree&lt;int&gt; tree1{4, 3, 2, 1};</span>
+<span class="lineNum">     171 </span>            : 
+<span class="lineNum">     172 </span><span class="lineCov">          1 :     tree.swap(tree1);</span>
+<span class="lineNum">     173 </span>            : 
+<span class="lineNum">     174 </span><span class="lineCov">          2 :     std::string buffer;</span>
+<span class="lineNum">     175 </span><span class="lineCov">          2 :     std::stringstream out (buffer);</span>
+<span class="lineNum">     176 </span><span class="lineCov">          2 :     std::string result_ = &quot;4  3  2  1  1  2  3  4  &quot;;</span>
+<span class="lineNum">     177 </span>            : 
+<span class="lineNum">     178 </span><span class="lineCov">          1 :     out &lt;&lt; tree;</span>
+<span class="lineNum">     179 </span><span class="lineCov">          1 :     out &lt;&lt; tree1;</span>
+<span class="lineNum">     180 </span><span class="lineCov">          2 :     std::string result;</span>
+<a name="181"><span class="lineNum">     181 </span><span class="lineCov">          1 :     getline(out, result);</span></a>
+<span class="lineNum">     182 </span><span class="lineCov">          1 :     REQUIRE(result == result_);</span>
+<span class="lineNum">     183 </span><span class="lineCov">          4 : }</span>
+<span class="lineNum">     184 </span>            : 
+<span class="lineNum">     185 </span>            : 
+<span class="lineNum">     186 </span>            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
