@@ -1,10 +1,9 @@
-#include "catch.hpp"
-#include "tree.hpp"
 #include <string>
 #include <sstream>
 #include <iostream>
 #include <fstream>
-
+#include "catch.hpp"
+#include "tree.hpp"
 
 TEST_CASE("Creating tree") {
     BStree::Tree<int> tree;
@@ -59,11 +58,12 @@ TEST_CASE("Printing of tree by various traversal order") {
 }
 
 TEST_CASE("Asigment of tree"){
-    BStree::Tree<int> tree;
+    BStree::Tree<int> tree {1,2,3};
     BStree::Tree<int> tree1 {1, 2, 3};
 
     tree1 = tree;
-    REQUIRE(tree1.empty() == false);
+
+    REQUIRE(tree1.empty() == true);
 }
 
 TEST_CASE("Adding node") {

@@ -11,10 +11,12 @@ private:
     auto min_el(Node<T>* )const -> Node<T>*;
     auto max_el(Node<T>* )const -> Node<T>*;
    public:
-    BSTIterator(const Node<T>& other) : pointer{other.pointer} {};
+   	BSTIterator() : pointer{nullptr} {};
+   	BSTIterator(Node<T>* ptr) : pointer{ptr} {};
+    BSTIterator(const BSTIterator& other) : pointer{other.pointer} {};
     auto operator=(const BSTIterator<T>& other)->BSTIterator<T>& ;
     auto operator++()->BSTIterator<T>& ;
-    auto operator++(int)->BSTIterator<T> ;
+    auto operator++(int)->BSTIterator<T> ; 
     auto operator--()->BSTIterator<T>& ;
     auto operator--(int)->BSTIterator<T> ;
     auto operator*() const ->T& ;
@@ -28,14 +30,14 @@ private:
 template<typename T2>
 auto   operator!=(const BSTIterator<T2>& other) const -> bool {
     if(pointer != other.pointer)
-    	return false;
-    return true;
+    	return true;
+    return false;
 }
 
 template<typename T3>
  auto 	 swap(BSTIterator<T3>& lhs, BSTIterator<T3>& rhs) -> void{
 	std::swap(lhs.pointer, rhs.pointer);
-}
+	}
 
 };
 
@@ -59,7 +61,7 @@ auto BSTIterator<T>::max_el(Node<T>* node )const -> Node<T>*{
 
 template<typename T>
 auto BSTIterator<T>::next(Node<T>* node)->Node<T>* {
-	if(node->right == nullptr)
+	if(node->right != nullptr)
 		return min_el(node->right);
 	Node<T>* parent_ = node->parent;
 	while(parent_ != nullptr && node == parent_ ->right){
@@ -71,8 +73,8 @@ auto BSTIterator<T>::next(Node<T>* node)->Node<T>* {
 
 template<typename T>
 auto BSTIterator<T>::prev(Node<T>* node)->Node<T>* {
-	if(node->left == nullptr)
-		return max_el(node->right);
+	if(node->left != nullptr)
+		return max_el(node->left);
 	Node<T>* parent_ = node->parent;
 	while(parent_ != nullptr && node == parent_ ->left){
 		node = parent_;
@@ -94,7 +96,7 @@ auto BSTIterator<T>::operator++()->BSTIterator<T>&  {
 
 template<typename T>
 auto BSTIterator<T>::operator++(int) ->BSTIterator<T> {
-    BSTIterator<T> before (*this);
+    BSTIterator<T> before (pointer);
     ++(*this);
     return before;
 
@@ -108,7 +110,7 @@ auto BSTIterator<T>::operator--()->BSTIterator<T>&  {
 
 template<typename T>
 auto BSTIterator<T>::operator--(int) ->BSTIterator<T> {
-    BSTIterator<T> before (*this);
+    BSTIterator<T> before (pointer);
     --(*this);  
     return before;
 }

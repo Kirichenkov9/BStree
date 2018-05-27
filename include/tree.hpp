@@ -18,7 +18,6 @@ class Tree {
     Node<T>* root;
     auto print_root(const Node<T>* node) -> void;
     auto destructor(Node<T>* node) -> void;
-    
 public:
     
     Tree() {
@@ -39,22 +38,44 @@ public:
     auto friend operator<<(std::ostream& stream, const Tree<T1>& tree) -> std::ostream& {
         return tree.print_order(stream, BStree::traversal_order::pre);
     }
-    auto  operator=(const Tree<T>& tree) -> Tree<T>&;
+    template <typename T2>
+    auto operator=(const Tree<T2>& tree) -> Tree<T2>&{
+        destructor(root);
+        Tree tmp{tree};
+        this->swap(tmp);
+        return *this;
+    }
 
 auto begin() -> BSTIterator<T>{
-    return BSTIterator<T>(min_el(root));
+    Node<T>* node = root;
+    while(node->left!=nullptr)
+        node = node->left;
+    BSTIterator<T> it (node);
+    return it;
 }
 
 auto end() -> BSTIterator<T>{
-    return BSTIterator<T>(max_el(root)->right);
+    Node<T>* node = root;
+    while(node->right!=nullptr)
+        node = node->right;
+     BSTIterator<T> it (node);
+    return it;
  }
  
 auto rbegin() -> BSTIterator<T> {
-    return BSTIterator<T>(max_el(root));
+    Node<T>* node = root;
+    while(node->right!=nullptr)
+        node = node->right;
+     BSTIterator<T> it (node);
+    return it;
 }
 
 auto rend() -> BSTIterator<T> {
-    return BSTIterator<T>(min_el(root)->left);
+    Node<T>* node = root;
+    while(node->left!=nullptr)
+        node = node->left;
+     BSTIterator<T> it (node);
+    return it;
 }
 
     ~Tree() {
@@ -64,8 +85,6 @@ auto rend() -> BSTIterator<T> {
 
 };
 }
-
-
 
 template <typename T>
 BStree::Tree<T>::Tree(std::initializer_list<T> list) {
@@ -86,14 +105,6 @@ BStree::Tree<T>::Tree(const Tree<T>& tree) : Tree{} {
         this->add(value);
     }
 }
-
-template<typename T>
-auto  BStree::Tree<T>::operator=(const Tree<T>& tree) -> Tree<T>&{
-        destructor(root);
-        Tree tmp{tree};
-        this->swap(tmp);
-        return *this;
-    }
 
 template <typename T>
 auto BStree::Tree<T>::search(T value) const -> bool {
@@ -240,6 +251,7 @@ auto BStree::Tree<T>::remove(T value)-> bool{
     Node<T>* parent_  = nullptr;
 
     while( pointer->data != value) {
+        parent_ = pointer;
         if(value < pointer->data)
             pointer = pointer->left;
         else
@@ -257,6 +269,61 @@ auto BStree::Tree<T>::remove(T value)-> bool{
         else if(pointer->right != nullptr)
             child = pointer->right;
 
+        if(parent_ == nullptr)
+            root = child;
+        else {
+            if(parent_->left == pointer)
+                parent_->left = child;
+            else
+                parent_->right = child;
+        }
+    } else {
+        Node<T>* mostLeft = pointer->right;
+        Node<T>* mostLeftParent = pointer;
+
+        while (mostLeft->left != nullptr) {
+            mostLeftParent = mostLeft;
+            mostLeft = mostLeft->left;
+        }
+
+        pointer->data = mostLeft->data;
+        removed = mostLeft;
+
+        if(mostLeftParent->left == mostLeft)
+            mostLeftParent->left = nullptr;
+        else
+            mostLeftParent->right = mostLeft->right;
+    }
+    delete removed;
+    removed = nullptr;
+    return true;
+}
+/*
+template <typename T>
+auto BStree::Tree<T>::remove(T value)-> bool{
+    if(!search(value))
+        return false;
+    Node<T>* pointer = root;
+    Node<T>* parent_  = nullptr;
+
+    while( pointer->data != value) {
+        if(value < pointer->data)
+            pointer = pointer->left;
+        else
+            pointer = pointer->right;
+    }
+
+    Node<T>* removed = nullptr;
+
+    if (pointer->left == nullptr || pointer->right == nullptr) {
+        Node<T>* child = nullptr;
+        removed = pointer;
+
+        if(pointer->left != nullptr)
+            child = pointer->left;
+        else if(pointer->right != nullptr)
+            child = pointer->right;
+        
         if(pointer->parent == nullptr)
             root = child;
         else {
@@ -285,7 +352,7 @@ auto BStree::Tree<T>::remove(T value)-> bool{
     removed = nullptr;
     return true;
 }
-
+*/
 template <typename T>
 auto BStree::Tree<T>::save(const std::string& filename) -> bool {
     std::ifstream fin(filename.c_str());
