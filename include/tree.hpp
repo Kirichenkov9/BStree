@@ -1,18 +1,16 @@
+#ifndef __TREE_HPP__
+#define __TREE_HPP__
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <Node.hpp>
+#include <iterator.hpp>
+
 
 namespace BStree {
-template <typename T>
-struct Node {
-    T data ;
-    Node<T>* left;
-    Node<T>* right;
-    Node(T value) : left{nullptr}, right{nullptr} {
-        data = value;
-    }
-};
+
 enum class traversal_order {pre, in, post};
 
 template <typename T>
@@ -20,7 +18,9 @@ class Tree {
     Node<T>* root;
     auto print_root(const Node<T>* node) -> void;
     auto destructor(Node<T>* node) -> void;
+    
 public:
+    
     Tree() {
         root = nullptr;
     }
@@ -39,19 +39,33 @@ public:
     auto friend operator<<(std::ostream& stream, const Tree<T1>& tree) -> std::ostream& {
         return tree.print_order(stream, BStree::traversal_order::pre);
     }
-    template <typename T2>
-    auto operator=(const Tree<T2>& tree) -> Tree<T2>& {
-        destructor(root);
-        Tree tmp{tree};
-        this->swap(tmp);
-        return *this;
-    }
+    auto  operator=(const Tree<T>& tree) -> Tree<T>&;
+
+auto begin() -> BSTIterator<T>{
+    return BSTIterator<T>(min_el(root));
+}
+
+auto end() -> BSTIterator<T>{
+    return BSTIterator<T>(max_el(root)->right);
+ }
+ 
+auto rbegin() -> BSTIterator<T> {
+    return BSTIterator<T>(max_el(root));
+}
+
+auto rend() -> BSTIterator<T> {
+    return BSTIterator<T>(min_el(root)->left);
+}
+
     ~Tree() {
         destructor(root);
     }
+    
 
 };
 }
+
+
 
 template <typename T>
 BStree::Tree<T>::Tree(std::initializer_list<T> list) {
@@ -72,6 +86,14 @@ BStree::Tree<T>::Tree(const Tree<T>& tree) : Tree{} {
         this->add(value);
     }
 }
+
+template<typename T>
+auto  BStree::Tree<T>::operator=(const Tree<T>& tree) -> Tree<T>&{
+        destructor(root);
+        Tree tmp{tree};
+        this->swap(tmp);
+        return *this;
+    }
 
 template <typename T>
 auto BStree::Tree<T>::search(T value) const -> bool {
@@ -102,6 +124,7 @@ auto BStree::Tree<T>::add(T value) -> bool {
         if(node->data > value ) {
             if(node -> left == nullptr) {
                 node -> left = new Node<T> {value};
+                node -> left -> parent = node;
                 break;
             }
             node = node -> left;
@@ -109,6 +132,7 @@ auto BStree::Tree<T>::add(T value) -> bool {
 
             if(node -> right == nullptr) {
                 node -> right = new Node<T> {value};
+                node -> right -> parent = node;
                 break;
             }
             node = node -> right;
@@ -213,10 +237,9 @@ auto BStree::Tree<T>::remove(T value)-> bool{
     if(!search(value))
         return false;
     Node<T>* pointer = root;
-    Node<T>* parent  = nullptr;
+    Node<T>* parent_  = nullptr;
 
     while( pointer->data != value) {
-        parent = pointer;
         if(value < pointer->data)
             pointer = pointer->left;
         else
@@ -234,30 +257,29 @@ auto BStree::Tree<T>::remove(T value)-> bool{
         else if(pointer->right != nullptr)
             child = pointer->right;
 
-        if(parent == nullptr)
+        if(pointer->parent == nullptr)
             root = child;
         else {
-            if(parent->left == pointer)
-                parent->left = child;
+            if(pointer->parent->left == pointer)
+                pointer->parent->left = child;
             else
-                parent->right = child;
+                pointer->parent->right = child;
         }
     } else {
         Node<T>* mostLeft = pointer->right;
-        Node<T>* mostLeftParent = pointer;
+        
 
         while (mostLeft->left != nullptr) {
-            mostLeftParent = mostLeft;
             mostLeft = mostLeft->left;
         }
 
         pointer->data = mostLeft->data;
         removed = mostLeft;
 
-        if(mostLeftParent->left == mostLeft)
-            mostLeftParent->left = nullptr;
+        if(mostLeft->parent->left == mostLeft)
+            mostLeft->parent->left= nullptr;
         else
-            mostLeftParent->right = mostLeft->right;
+            mostLeft->parent->right = mostLeft->right;
     }
     delete removed;
     removed = nullptr;
@@ -310,3 +332,4 @@ auto BStree::Tree<T>::empty() const -> bool {
         return false;
     return true;
 }
+#endif

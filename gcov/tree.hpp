@@ -40,7 +40,7 @@ public:
         return tree.print_order(stream, BStree::traversal_order::pre);
     }
     template <typename T2>
-    auto operator=(const Tree<T2>& tree) -> Tree<T2>& {
+    auto friend operator=(const Tree<T2>& tree) -> Tree<T2>& {
         destructor(root);
         Tree tmp{tree};
         this->swap(tmp);
