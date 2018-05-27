@@ -19,7 +19,7 @@ class Tree {
     auto print_root(const Node<T>* node) -> void;
     auto destructor(Node<T>* node) -> void;
 public:
-    
+
     Tree() {
         root = nullptr;
     }
@@ -38,52 +38,52 @@ public:
     auto friend operator<<(std::ostream& stream, const Tree<T1>& tree) -> std::ostream& {
         return tree.print_order(stream, BStree::traversal_order::pre);
     }
-    template <typename T2>
-    auto operator=(const Tree<T2>& tree) -> Tree<T2>&{
-        destructor(root);
-        Tree tmp{tree};
-        this->swap(tmp);
-        return *this;
+    auto operator=(const Tree<T>& tree) -> Tree<T>&;
+
+    auto begin() -> BSTIterator<T> {
+        Node<T>* node = root;
+        while(node->left!=nullptr)
+            node = node->left;
+        BSTIterator<T> it (node);
+        return it;
     }
 
-auto begin() -> BSTIterator<T>{
-    Node<T>* node = root;
-    while(node->left!=nullptr)
-        node = node->left;
-    BSTIterator<T> it (node);
-    return it;
-}
+    auto end() -> BSTIterator<T> {
+        Node<T>* node = root;
+        while(node->right!=nullptr)
+            node = node->right;
+        BSTIterator<T> it (node);
+        return it;
+    }
 
-auto end() -> BSTIterator<T>{
-    Node<T>* node = root;
-    while(node->right!=nullptr)
-        node = node->right;
-     BSTIterator<T> it (node);
-    return it;
- }
- 
-auto rbegin() -> BSTIterator<T> {
-    Node<T>* node = root;
-    while(node->right!=nullptr)
-        node = node->right;
-     BSTIterator<T> it (node);
-    return it;
-}
+    auto rbegin() -> BSTIterator<T> {
+        Node<T>* node = root;
+        while(node->right!=nullptr)
+            node = node->right;
+        BSTIterator<T> it (node);
+        return it;
+    }
 
-auto rend() -> BSTIterator<T> {
-    Node<T>* node = root;
-    while(node->left!=nullptr)
-        node = node->left;
-     BSTIterator<T> it (node);
-    return it;
-}
+    auto rend() -> BSTIterator<T> {
+        Node<T>* node = root;
+        while(node->left!=nullptr)
+            node = node->left;
+        BSTIterator<T> it (node);
+        return it;
+    }
 
     ~Tree() {
         destructor(root);
     }
-    
+
 
 };
+}
+
+template <typename T>
+auto BStree::Tree<T>::operator=(const Tree<T>& tree) -> Tree<T>& {
+    Tree tmp {tree};
+    tmp.swap(*this);
 }
 
 template <typename T>
@@ -149,7 +149,7 @@ auto BStree::Tree<T>::add(T value) -> bool {
             }
             node = node -> right;
 
-        }    
+        }
     }
     return true;
 }
@@ -279,7 +279,7 @@ auto BStree::Tree<T>::remove(T value)-> bool{
                 parent_->right = child;
             if(child != nullptr)
                 child -> parent = parent_;
-            
+
         }
     } else {
         Node<T>* mostLeft = pointer->right;
