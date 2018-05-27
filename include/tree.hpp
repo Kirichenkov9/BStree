@@ -296,7 +296,7 @@ auto BStree::Tree<T>::remove(T value)-> bool{
         if(mostLeftParent->left == mostLeft)
             mostLeftParent->left = nullptr;
         else
-            mostLeft ->right -> parent = mostLeftParent;
+            mostLeft -> parent ->right  = mostLeft->right;
     }
     delete removed;
     removed = nullptr;

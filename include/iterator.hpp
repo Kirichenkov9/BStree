@@ -28,14 +28,14 @@ private:
 }
 
 template<typename T2>
-auto   operator!=(const BSTIterator<T2>& other) const -> bool {
+auto   operator!=(const BSTIterator<T2>& other) const -> bool{
     if(pointer != other.pointer)
     	return true;
     return false;
 }
 
 template<typename T3>
- auto 	 swap(BSTIterator<T3>& lhs, BSTIterator<T3>& rhs) -> void{
+ auto friend swap(BSTIterator<T3>& lhs, BSTIterator<T3>& rhs) -> void{
 	std::swap(lhs.pointer, rhs.pointer);
 	}
 
@@ -120,6 +120,4 @@ template<typename T>
 auto BSTIterator<T>::operator*() const -> T&  {
     return pointer->data;
 }
-
-
 }
