@@ -58,13 +58,13 @@ TEST_CASE("Printing of tree by various traversal order") {
 }
 
 TEST_CASE("Asigment of tree"){
-    BStree::Tree<int> tree {1,2,3};
+    BStree::Tree<int> tree;
     BStree::Tree<int> tree1 {1, 2, 3};
 
     tree1 = tree;
-
-    REQUIRE(tree1.empty() == true);
+    REQUIRE(tree1.empty() == false);
 }
+
 
 TEST_CASE("Adding node") {
     BStree::Tree<int> tree  { 25, 34, 12, 4, 7, 67, 78, 9, 0 };
@@ -86,6 +86,7 @@ TEST_CASE("Adding node") {
     REQUIRE(tree.add(100) == true);
     REQUIRE(result== result_of_adding);
 }
+
 
 TEST_CASE("Deleting node") {
     BStree::Tree<int> tree  {8, 4, 12, 2, 6, 10, 14, 1, 3, 5 ,7, 9, 11, 13, 15 };

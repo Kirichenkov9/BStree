@@ -128,6 +128,7 @@ auto BStree::Tree<T>::add(T value) -> bool {
         return false;
     if (root == nullptr) {
         root = new Node<T> {value};
+        root -> parent = nullptr;
         return true;
     }
     Node<T>* node = root;
@@ -276,6 +277,9 @@ auto BStree::Tree<T>::remove(T value)-> bool{
                 parent_->left = child;
             else
                 parent_->right = child;
+            if(child != nullptr)
+                child -> parent = parent_;
+            
         }
     } else {
         Node<T>* mostLeft = pointer->right;
@@ -292,67 +296,14 @@ auto BStree::Tree<T>::remove(T value)-> bool{
         if(mostLeftParent->left == mostLeft)
             mostLeftParent->left = nullptr;
         else
-            mostLeftParent->right = mostLeft->right;
+            mostLeft ->right -> parent = mostLeftParent;
     }
     delete removed;
     removed = nullptr;
     return true;
 }
-/*
-template <typename T>
-auto BStree::Tree<T>::remove(T value)-> bool{
-    if(!search(value))
-        return false;
-    Node<T>* pointer = root;
-    Node<T>* parent_  = nullptr;
 
-    while( pointer->data != value) {
-        if(value < pointer->data)
-            pointer = pointer->left;
-        else
-            pointer = pointer->right;
-    }
 
-    Node<T>* removed = nullptr;
-
-    if (pointer->left == nullptr || pointer->right == nullptr) {
-        Node<T>* child = nullptr;
-        removed = pointer;
-
-        if(pointer->left != nullptr)
-            child = pointer->left;
-        else if(pointer->right != nullptr)
-            child = pointer->right;
-        
-        if(pointer->parent == nullptr)
-            root = child;
-        else {
-            if(pointer->parent->left == pointer)
-                pointer->parent->left = child;
-            else
-                pointer->parent->right = child;
-        }
-    } else {
-        Node<T>* mostLeft = pointer->right;
-        
-
-        while (mostLeft->left != nullptr) {
-            mostLeft = mostLeft->left;
-        }
-
-        pointer->data = mostLeft->data;
-        removed = mostLeft;
-
-        if(mostLeft->parent->left == mostLeft)
-            mostLeft->parent->left= nullptr;
-        else
-            mostLeft->parent->right = mostLeft->right;
-    }
-    delete removed;
-    removed = nullptr;
-    return true;
-}
-*/
 template <typename T>
 auto BStree::Tree<T>::save(const std::string& filename) -> bool {
     std::ifstream fin(filename.c_str());

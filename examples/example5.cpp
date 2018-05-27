@@ -1,7 +1,7 @@
 #include <iostream>
 #include <tree.hpp>
 int main() {
-    
+
     BStree::Tree<int> tree{8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15};
     std::cout << "Tree is:\n";
     tree.print_order(std::cout, BStree::traversal_order::pre);
@@ -19,4 +19,17 @@ int main() {
         std::cout << *it << " ";
     }
     std::cout <<*it<<std::endl;
+
+    BStree::BSTIterator<int> t;
+    t = it;
+    std::cout<<*t<<std::endl;
+
+    std::cout<<*++t<<std::endl;
+    std::cout<<*--t<<std::endl;
+
+    swap(t, it_);
+
+    std::cout<<*t<<std::endl;
+
+
 }
