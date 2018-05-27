@@ -86,6 +86,7 @@ auto BSTIterator<T>::prev(Node<T>* node)->Node<T>* {
 template<typename T>
 auto BSTIterator<T>::operator=(const BSTIterator<T>& other) ->BSTIterator<T>& {
     pointer = other.pointer;
+    return *this;
 }
 
 template<typename T>
