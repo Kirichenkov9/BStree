@@ -38,7 +38,7 @@ public:
     auto friend operator<<(std::ostream& stream, const Tree<T1>& tree) -> std::ostream& {
         return tree.print_order(stream, BStree::traversal_order::pre);
     }
-    auto operator=(const Tree<T>& tree) -> void;
+    auto operator=(const Tree<T>& tree) -> Tree<T>&;
 
     auto begin() -> BSTIterator<T> {
         Node<T>* node = root;
@@ -81,9 +81,10 @@ public:
 }
 
 template <typename T>
-auto BStree::Tree<T>::operator=(const Tree<T>& tree) -> void{
+auto BStree::Tree<T>::operator=(const Tree<T>& tree) -> Tree<T>&{
     Tree tmp {tree};
     tmp.swap(*this);
+    return *this;
 }
 
 template <typename T>
