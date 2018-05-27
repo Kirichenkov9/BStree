@@ -1,10 +1,9 @@
-#include "catch.hpp"
-#include "tree.hpp"
 #include <string>
 #include <sstream>
 #include <iostream>
 #include <fstream>
-
+#include "catch.hpp"
+#include "tree.hpp"
 
 TEST_CASE("Creating tree") {
     BStree::Tree<int> tree;
@@ -13,10 +12,10 @@ TEST_CASE("Creating tree") {
     REQUIRE(tree_.empty() == true);
 }
 
-TEST_CASE("Copy tree"){
+TEST_CASE("Copy tree") {
     BStree::Tree<int> tree  { 1, 2, 3, 4 };
     BStree::Tree<int> tree1  {tree};
-    
+
     std::string result = "1  2  3  4  ";
     std::string str;
 
@@ -58,13 +57,23 @@ TEST_CASE("Printing of tree by various traversal order") {
     REQUIRE(post == result_post);
 }
 
-TEST_CASE("Asigment of tree"){
-    BStree::Tree<int> tree;
+TEST_CASE("Asigment of tree") {
+    BStree::Tree<int> tree {1, 2, 3, 4};
     BStree::Tree<int> tree1 {1, 2, 3};
 
-    tree1 = tree;
-    REQUIRE(tree1.empty() == false);
+    tree = tree1;
+
+    std::string buffer;
+    std::stringstream out(buffer);
+
+    out << tree;
+
+    std::string result = "1  2  3  ";
+    std::string res;
+    getline(out, res);
+    REQUIRE(res == result);
 }
+
 
 TEST_CASE("Adding node") {
     BStree::Tree<int> tree  { 25, 34, 12, 4, 7, 67, 78, 9, 0 };
@@ -87,8 +96,9 @@ TEST_CASE("Adding node") {
     REQUIRE(result== result_of_adding);
 }
 
+
 TEST_CASE("Deleting node") {
-    BStree::Tree<int> tree  {8, 4, 12, 2, 6, 10, 14, 1, 3, 5 ,7, 9, 11, 13, 15 };
+    BStree::Tree<int> tree  {8, 4, 12, 2, 6, 10, 14, 1, 3, 5,7, 9, 11, 13, 15 };
     tree.remove(4);
     tree.remove(1);
     tree.remove(9);
@@ -96,9 +106,9 @@ TEST_CASE("Deleting node") {
     tree.remove(14);
     tree.remove(2);
     tree.remove(3);
-   
+
     BStree::Tree<int> tree1 {1};
-    
+
     REQUIRE(tree.remove(15) == true);
     REQUIRE(tree1.remove(1) == true);
     REQUIRE(tree.remove(100) == false);
@@ -140,12 +150,12 @@ TEST_CASE("Saving on file") {
     REQUIRE( tree.save("BStree.txt") == false);
 }
 
-TEST_CASE("Loading from file"){
+TEST_CASE("Loading from file") {
     std::string buffer;
     std::stringstream out (buffer);
     std::string result_ = "1  2  3  4  5  ";
 
-    BStree::Tree<int> tree {1, 2, 3, 4 ,5};
+    BStree::Tree<int> tree {1, 2, 3, 4,5};
     tree.save("Tree.txt");
 
     BStree::Tree<int> tree1;
@@ -165,8 +175,8 @@ TEST_CASE("Loading from file"){
     REQUIRE( tree2.load("t.txt") == false);
 }
 
-TEST_CASE("Swap"){
-    BStree::Tree<int> tree{1, 2, 3 ,4};
+TEST_CASE("Swap") {
+    BStree::Tree<int> tree{1, 2, 3,4};
     BStree::Tree<int> tree1{4, 3, 2, 1};
 
     tree.swap(tree1);
@@ -182,5 +192,59 @@ TEST_CASE("Swap"){
     REQUIRE(result == result_);
 }
 
+TEST_CASE("Iterator") {
+    BStree::Tree<int> tree{8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15};
 
+    std::string pre_result ="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15";
+    std::string post_result ="15 14 13 12 11 10 9 8 7 6 5 4 3 2 1";
 
+    std::string buffer;
+    std::stringstream out (buffer);
+
+    BStree::BSTIterator<int> it_ = tree.begin();
+
+    REQUIRE(*it_ == 1);
+
+    for (; it_ != tree.end(); ++it_) {
+        out << *it_ << " ";
+    }
+    out<<*it_<<std::endl;
+
+    REQUIRE(*it_ == 15);
+
+    BStree::BSTIterator<int> it = tree.rbegin();
+
+    REQUIRE(*it == 15);
+
+    for (; it != tree.rend(); --it) {
+        out << *it << " ";
+    }
+    out <<*it<<std::endl;
+
+    REQUIRE(*it == 1);
+
+    std::string result_pre;
+    getline(out, result_pre);
+
+    std::string result_post;
+    getline(out, result_post);
+
+    REQUIRE(result_pre == pre_result);
+    REQUIRE(result_post == post_result);
+
+    BStree::BSTIterator<int> t;
+    t = it;
+    REQUIRE(*t == *it);
+    t++;
+    REQUIRE( *t== *it+1);
+    t--;
+    REQUIRE(*t == *it);
+
+    swap(t, it_);
+    REQUIRE(*t == 15);
+
+    t=it;
+    REQUIRE((t==it) == true);
+    t++;
+    REQUIRE((t==it) == false);
+}

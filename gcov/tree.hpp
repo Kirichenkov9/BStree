@@ -1,18 +1,16 @@
+#ifndef __TREE_HPP__
+#define __TREE_HPP__
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
+#include "Node.hpp"
+#include "iterator.hpp"
+
 
 namespace BStree {
-template <typename T>
-struct Node {
-    T data ;
-    Node<T>* left;
-    Node<T>* right;
-    Node(T value) : left{nullptr}, right{nullptr} {
-        data = value;
-    }
-};
+
 enum class traversal_order {pre, in, post};
 
 template <typename T>
@@ -21,6 +19,7 @@ class Tree {
     auto print_root(const Node<T>* node) -> void;
     auto destructor(Node<T>* node) -> void;
 public:
+
     Tree() {
         root = nullptr;
     }
@@ -39,18 +38,52 @@ public:
     auto friend operator<<(std::ostream& stream, const Tree<T1>& tree) -> std::ostream& {
         return tree.print_order(stream, BStree::traversal_order::pre);
     }
-    template <typename T2>
-    auto operator=(const Tree<T2>& tree) -> Tree<T2>& {
-        destructor(root);
-        Tree tmp{tree};
-        this->swap(tmp);
-        return *this;
+    auto operator=(const Tree<T>& tree) -> Tree<T>&;
+
+    auto begin() -> BSTIterator<T> {
+        Node<T>* node = root;
+        while(node->left!=nullptr)
+            node = node->left;
+        BSTIterator<T> it (node);
+        return it;
     }
+
+    auto end() -> BSTIterator<T> {
+        Node<T>* node = root;
+        while(node->right!=nullptr)
+            node = node->right;
+        BSTIterator<T> it (node);
+        return it;
+    }
+
+    auto rbegin() -> BSTIterator<T> {
+        Node<T>* node = root;
+        while(node->right!=nullptr)
+            node = node->right;
+        BSTIterator<T> it (node);
+        return it;
+    }
+
+    auto rend() -> BSTIterator<T> {
+        Node<T>* node = root;
+        while(node->left!=nullptr)
+            node = node->left;
+        BSTIterator<T> it (node);
+        return it;
+    }
+
     ~Tree() {
         destructor(root);
     }
 
+
 };
+}
+
+template <typename T>
+auto BStree::Tree<T>::operator=(const Tree<T>& tree) -> Tree<T>& {
+    Tree tmp {tree};
+    tmp.swap(*this);
 }
 
 template <typename T>
@@ -95,6 +128,7 @@ auto BStree::Tree<T>::add(T value) -> bool {
         return false;
     if (root == nullptr) {
         root = new Node<T> {value};
+        root -> parent = nullptr;
         return true;
     }
     Node<T>* node = root;
@@ -102,6 +136,7 @@ auto BStree::Tree<T>::add(T value) -> bool {
         if(node->data > value ) {
             if(node -> left == nullptr) {
                 node -> left = new Node<T> {value};
+                node -> left -> parent = node;
                 break;
             }
             node = node -> left;
@@ -109,11 +144,12 @@ auto BStree::Tree<T>::add(T value) -> bool {
 
             if(node -> right == nullptr) {
                 node -> right = new Node<T> {value};
+                node -> right -> parent = node;
                 break;
             }
             node = node -> right;
 
-        }    
+        }
     }
     return true;
 }
@@ -213,10 +249,10 @@ auto BStree::Tree<T>::remove(T value)-> bool{
     if(!search(value))
         return false;
     Node<T>* pointer = root;
-    Node<T>* parent  = nullptr;
+    Node<T>* parent_  = nullptr;
 
     while( pointer->data != value) {
-        parent = pointer;
+        parent_ = pointer;
         if(value < pointer->data)
             pointer = pointer->left;
         else
@@ -234,13 +270,16 @@ auto BStree::Tree<T>::remove(T value)-> bool{
         else if(pointer->right != nullptr)
             child = pointer->right;
 
-        if(parent == nullptr)
+        if(parent_ == nullptr)
             root = child;
         else {
-            if(parent->left == pointer)
-                parent->left = child;
+            if(parent_->left == pointer)
+                parent_->left = child;
             else
-                parent->right = child;
+                parent_->right = child;
+            if(child != nullptr)
+                child -> parent = parent_;
+
         }
     } else {
         Node<T>* mostLeft = pointer->right;
@@ -257,12 +296,13 @@ auto BStree::Tree<T>::remove(T value)-> bool{
         if(mostLeftParent->left == mostLeft)
             mostLeftParent->left = nullptr;
         else
-            mostLeftParent->right = mostLeft->right;
+            mostLeft -> parent ->right  = mostLeft->right;
     }
     delete removed;
     removed = nullptr;
     return true;
 }
+
 
 template <typename T>
 auto BStree::Tree<T>::save(const std::string& filename) -> bool {
@@ -310,3 +350,4 @@ auto BStree::Tree<T>::empty() const -> bool {
         return false;
     return true;
 }
+#endif
