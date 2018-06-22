@@ -19,10 +19,7 @@ class Tree {
     auto print_root(const Node<T>* node) -> void;
     auto destructor(Node<T>* node) -> void;
 public:
-
-    Tree() {
-        root = nullptr;
-    }
+    Tree() { root = nullptr; }
     Tree(std::initializer_list<T> list);
     Tree(const Tree<T>& tree);
     auto remove(T value)->bool;
@@ -39,7 +36,6 @@ public:
         return tree.print_order(stream, BStree::traversal_order::pre);
     }
     auto operator=(const Tree<T>& tree) -> Tree<T>&;
-
     auto begin() -> BSTIterator<T> {
         Node<T>* node = root;
         while(node->left!=nullptr)
@@ -47,15 +43,14 @@ public:
         BSTIterator<T> it (node);
         return it;
     }
-
     auto end() -> BSTIterator<T> {
         Node<T>* node = root;
         while(node->right!=nullptr)
             node = node->right;
+        node = node->right;
         BSTIterator<T> it (node);
         return it;
     }
-
     auto rbegin() -> BSTIterator<T> {
         Node<T>* node = root;
         while(node->right!=nullptr)
@@ -63,20 +58,17 @@ public:
         BSTIterator<T> it (node);
         return it;
     }
-
     auto rend() -> BSTIterator<T> {
         Node<T>* node = root;
         while(node->left!=nullptr)
             node = node->left;
+        node = node->left;
         BSTIterator<T> it (node);
         return it;
     }
-
     ~Tree() {
         destructor(root);
     }
-
-
 };
 }
 
