@@ -195,34 +195,27 @@ TEST_CASE("Swap") {
 TEST_CASE("Iterator") {
     BStree::Tree<int> tree{8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15};
 
-    std::string pre_result ="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15";
-    std::string post_result ="15 14 13 12 11 10 9 8 7 6 5 4 3 2 1";
+    std::string pre_result ="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 ";
+    std::string post_result ="15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 ";
 
     std::string buffer;
     std::stringstream out (buffer);
 
     BStree::BSTIterator<int> it_ = tree.begin();
 
-    REQUIRE(*it_ == 1);
-
+    
     for (; it_ != tree.end(); ++it_) {
         out << *it_ << " ";
     }
-    out<<*it_<<std::endl;
 
-    REQUIRE(*it_ == 15);
+    out<<std::endl;
 
     BStree::BSTIterator<int> it = tree.rbegin();
-
-    REQUIRE(*it == 15);
 
     for (; it != tree.rend(); --it) {
         out << *it << " ";
     }
-    out <<*it<<std::endl;
-
-    REQUIRE(*it == 1);
-
+    
     std::string result_pre;
     getline(out, result_pre);
 
@@ -232,19 +225,5 @@ TEST_CASE("Iterator") {
     REQUIRE(result_pre == pre_result);
     REQUIRE(result_post == post_result);
 
-    BStree::BSTIterator<int> t;
-    t = it;
-    REQUIRE(*t == *it);
-    t++;
-    REQUIRE( *t== *it+1);
-    t--;
-    REQUIRE(*t == *it);
-
-    swap(t, it_);
-    REQUIRE(*t == 15);
-
-    t=it;
-    REQUIRE((t==it) == true);
-    t++;
-    REQUIRE((t==it) == false);
+    
 }

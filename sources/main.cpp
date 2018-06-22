@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
             tree.add(atoi(argv[i]));
         }
     }
-
+    
     bool flag = false;
 
     for(;;) {

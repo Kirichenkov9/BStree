@@ -1,3 +1,5 @@
+#ifndef __ITERATOR__HPP
+#define __ITERATOR__HPP
 #include <iterator>
 #include "Node.hpp"
 
@@ -20,6 +22,7 @@ public:
     auto operator--()->BSTIterator<T>& ;
     auto operator--(int)->BSTIterator<T> ;
     auto operator*() const ->T& ;
+    auto operator->() const -> T*;
     template<typename T1>
     auto friend operator==(BSTIterator<T1>& it, const BSTIterator<T1>& other)-> bool{
         if(it.pointer == other.pointer)
@@ -121,4 +124,10 @@ template<typename T>
 auto BSTIterator<T>::operator*() const -> T&  {
     return pointer->data;
 }
+
+template<typename T>
+auto BSTIterator<T>::operator->() const -> T* {
+    return &(pointer->data);
 }
+}
+#endif
